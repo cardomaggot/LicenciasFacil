@@ -17,7 +17,12 @@
         android:layout_alignTop="@+id/editText"
         android:layout_centerHorizontal="true"
         />
-
+    <ImageView
+        android:id="@+id/apache"
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/wings" />
     <TextView
         android:id="@+id/editText"
         android:layout_width="wrap_content"

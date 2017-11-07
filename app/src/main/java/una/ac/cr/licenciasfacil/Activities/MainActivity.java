@@ -1,5 +1,7 @@
 package una.ac.cr.licenciasfacil.Activities;
 
+
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,11 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import una.ac.cr.licenciasfacil.Fragmentos.BuscarFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.IniciarSessionFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RecuperarContrasenaFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RegistrarUsuarioFragment;
 import una.ac.cr.licenciasfacil.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BuscarFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,IniciarSessionFragment.OnFragmentInteractionListener, RegistrarUsuarioFragment.OnFragmentInteractionListener ,RecuperarContrasenaFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Licencias Facil V 1.0 CC", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -93,25 +97,24 @@ public class MainActivity extends AppCompatActivity
         boolean cambioFragment=false;
 
 
-        if (id == R.id.nav_camera) {
-            fg=new BuscarFragment();
+        if (id == R.id.nav_IniciarSession) {
+            fg=new IniciarSessionFragment();
             cambioFragment=true;
-        }else if (id == R.id.nav_libre) {
+        }else if (id == R.id.nav_AgregarCuenta) {
+            fg=new RegistrarUsuarioFragment();
+            cambioFragment=true;
+        }else if (id == R.id.nav_RecuperarPass) {
+            fg=new RecuperarContrasenaFragment();
+            cambioFragment=true;
+        }else if (id == R.id.nav_BuscarLicencia) {
+            //
+        }else if (id == R.id.nav_SoftwareLibre) {
 
             //cambioFragment=true;
-        }else if (id == R.id.nav_gallery) {
+        }else if (id == R.id.nav_SoftwarePrivativo) {
 
             //cambioFragment=true;
-        }else if (id == R.id.nav_slideshow) {
-
-            //cambioFragment=true;
-        }else if (id == R.id.nav_share) {
-
-            //cambioFragment=true;
-        }else if (id == R.id.nav_send) {
-
-            //cambioFragment=true;
-        }else if (id == R.id.nav_manage) {
+        }else if (id == R.id.nav_ListaLicencias) {
 
             //cambioFragment=true;
         }

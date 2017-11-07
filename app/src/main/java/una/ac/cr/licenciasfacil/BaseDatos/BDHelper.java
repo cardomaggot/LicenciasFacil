@@ -24,8 +24,10 @@ public class BDHelper {
             BDContract.Licencia.TABLE_NAME + " ( " +
             BDContract.Licencia.ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +//Verificar el ID
             BDContract.Licencia.NOMBRE + " TEXT, "+
-            BDContract.Licencia.DESCRIPCION + " TEXT, "+
-            BDContract.Licencia.TIPO + " TEXT )";
+            BDContract.Licencia.VERSION + " TEXT, "+
+            BDContract.Licencia.TIPO + " TEXT )"+
+            BDContract.Licencia.DESCRIPCION + " TEXT, "
+            ;
 
     public static final String SQL_CREATE_LICENCIASAPROBAR = "CREATE TABLE " +
             BDContract.LicenciaAprobacion.TABLE_NAME + " ( " +
@@ -44,8 +46,9 @@ public class BDHelper {
 
     public static final String SQL_CREATE_USUARIOS = "CREATE TABLE " +
             BDContract.Usuario.TABLE_NAME + " ( " +
-            BDContract.Usuario.ID+ " TEXT PRIMARY KEY, " +
-            BDContract.Usuario.CONTRASEÑA+ " TEXT )";
+            BDContract.Usuario.ID + " TEXT PRIMARY KEY, " +
+            BDContract.Usuario.EMAIL + "TEXT" +
+            BDContract.Usuario.CONTRASENA + " TEXT )";
 
 
 
