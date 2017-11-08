@@ -5,78 +5,32 @@
     tools:context="una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imgWingx"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wingx"
-                android:paddingTop="30dp"/>
-
-            <EditText
-                android:id="@+id/txtNombreLicencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nombre"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
-
-            <EditText
-                android:id="@+id/txtVersionLicencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Versión"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
-
-            <EditText
-                android:id="@+id/txtTipoLicencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Tipo"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
-
-            <EditText
-                android:id="@+id/txtDescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:text="Descripción"
-                android:height="150dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1"
+            tools:ignore="MissingConstraints">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnInsertarLicencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrar"
-                android:textColor="#2ecc71"
                 android:background="#ffff"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
+                android:gravity="center"
+                android:text="Añadir Nueva Licencia"
+                android:textColor="#2c3e50" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+                android:id="@+id/listLicencias"></ListView>
 
         </LinearLayout>
     </RelativeLayout>

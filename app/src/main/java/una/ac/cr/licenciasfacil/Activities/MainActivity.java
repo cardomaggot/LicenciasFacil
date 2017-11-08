@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ActualizarLicenciaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciasFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CodigoAbiertoFragment;
@@ -35,8 +34,8 @@ public class MainActivity extends AppCompatActivity
         RegistrarUsuarioFragment.OnFragmentInteractionListener ,RecuperarContrasenaFragment.OnFragmentInteractionListener,
         ListaLicenciasFragment.OnFragmentInteractionListener, SoftwareLibreFragment.OnFragmentInteractionListener,
         SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
-        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener,
-        ActualizarLicenciaFragment.OnFragmentInteractionListener{
+        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener
+        {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Licencias Facil V 1.0 CC", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Licencias Facil V 1.0 CC", 2000)
                         .setAction("Action", null).show();
             }
         });
@@ -94,6 +93,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            finish();
             return true;
         }
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fg = null;
         boolean cambioFragment=false;
 
-
+        //REGISTRO USUARIO
         if (id == R.id.nav_IniciarSession) {
             fg=new IniciarSessionFragment();
             cambioFragment=true;
@@ -121,12 +121,11 @@ public class MainActivity extends AppCompatActivity
             fg=new RecuperarContrasenaFragment();
             cambioFragment=true;
 
-        }else if (id == R.id.nav_RegistrarLicencia) {
-            fg=new RegistrarLicenciaFragment();
-            cambioFragment=true;
+        }
 
-        }else if (id == R.id.nav_ActualizarLicencia) {
-            fg=new ActualizarLicenciaFragment();
+        //REGISTRO LICENCIAS
+        else if (id == R.id.nav_RegistrarLicencia) {
+            fg=new RegistrarLicenciaFragment();
             cambioFragment=true;
 
         }else if (id == R.id.nav_BuscarLicencia) {
@@ -137,7 +136,10 @@ public class MainActivity extends AppCompatActivity
             fg=new ListaLicenciasFragment();
             cambioFragment=true;
 
-        }else if (id == R.id.nav_SoftwareLibre) {
+        }
+
+        //SOFTWARE
+        else if (id == R.id.nav_SoftwareLibre) {
             fg=new SoftwareLibreFragment();
             cambioFragment=true;
 
@@ -153,7 +155,6 @@ public class MainActivity extends AppCompatActivity
             fg = new SoftwarePrivativoFragment();
             cambioFragment = true;
         }
-
 
 
         if(cambioFragment){

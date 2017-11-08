@@ -21,14 +21,7 @@
     <item android:title="Registro Licencias">
         <menu>
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_RegistrarLicencia"
-            android:icon="@android:drawable/ic_search_category_default"
-            android:title="Registrar Licencia"/>
-        <item
-            android:id="@+id/nav_ActualizarLicencia"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Actualizar Licencia"/>
+
         <item
             android:id="@+id/nav_BuscarLicencia"
             android:icon="@android:drawable/ic_search_category_default"
@@ -37,6 +30,10 @@
             android:id="@+id/nav_ListaLicencias"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Lista de Licencias" />
+        <item
+            android:id="@+id/nav_RegistrarLicencia"
+            android:icon="@android:drawable/ic_search_category_default"
+            android:title="Registrar Licencia"/>
 
 
     </group>

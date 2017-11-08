@@ -1,13 +1,28 @@
 package una.ac.cr.licenciasfacil.Fragmentos.Licencias;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import una.ac.cr.licenciasfacil.Activities.ActualizarLicencia;
+import una.ac.cr.licenciasfacil.Activities.InsertarLicencia;
+import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
+import una.ac.cr.licenciasfacil.Clases.Licencia;
+import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
 import una.ac.cr.licenciasfacil.R;
 
 /**
@@ -27,6 +42,11 @@ public class RegistrarLicenciaFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button btnAñadir;
+    ListView listaLicencias;
+    ArrayList<Licencia> lista = new ArrayList<>();
+    BDOperations bd;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,8 +85,53 @@ public class RegistrarLicenciaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registrar_licencia, container, false);
+        View v = inflater.inflate(R.layout.fragment_registrar_licencia, container, false);
+
+        btnAñadir = (Button) v.findViewById(R.id.btnInsertarLicencia);
+        listaLicencias = (ListView) v.findViewById(R.id.listLicencias);
+
+        bd = new BDOperations(v.getContext());
+
+        CargarLista();
+
+        listaLicencias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                //cambiar de activity y mandarle el id de la licencia que fue seleccionada
+                Intent intent = new Intent(view.getContext(), ActualizarLicencia.class);
+                intent.putExtra("lic",lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                //intent.putExtra("lista",lista.get(position).getId());
+                startActivity(intent);
+            }
+        });
+
+        listaLicencias.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
+                mensaje_Si_No(lista.get(position).getId());
+                return true;
+            }
+        });
+
+        btnAñadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inte = new Intent(v.getContext(), InsertarLicencia.class);
+                startActivity(inte);
+            }
+        });
+
+        return v;
     }
+
+
+    public void CargarLista(){
+        lista = bd.cargarLicencias();
+        LicenciaAdapter adapter = new LicenciaAdapter(getActivity(), lista);
+        listaLicencias.setAdapter(adapter);
+    }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -106,4 +171,29 @@ public class RegistrarLicenciaFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    public void mensaje_Si_No(final String idLic){
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
+        dialogo1.setTitle("Atención");
+        dialogo1.setMessage("¿Desea Eliminar la Licencia ?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                if(bd.deleteLicencia(idLic))
+                    Toast.makeText(getActivity(),"Se ha eliminado la licencia",Toast.LENGTH_SHORT);
+                else
+                    Toast.makeText(getActivity(),"No se ha podido eliminar la licencia",Toast.LENGTH_SHORT);
+
+                CargarLista();
+            }
+        });
+        dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.dismiss();
+            }
+        });
+        dialogo1.show();
+    }
+
 }

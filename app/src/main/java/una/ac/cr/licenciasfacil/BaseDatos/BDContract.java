@@ -25,9 +25,10 @@ public class BDContract {
         public static final String TABLE_NAME = "licencias";
         public static final String ID = "id";
         public static final String NOMBRE = "nombre";
-        public static final String TIPO= "tipo";
-        public static final String VERSION= "version";
-        public static final String DESCRIPCION= "descripcion";
+        public static final String TIPO = "tipo";
+        public static final String VERSION = "version";
+        public static final String DESCRIPCION = "descripcion";
+        public static final String SOFTWARE = "software";
 
     }
 
