@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Registro">
+    <item android:title="Registro Usuarios">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -18,41 +18,50 @@
             </group>
         </menu>
     </item>
+    <item android:title="Registro Licencias">
+        <menu>
     <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_RegistrarLicencia"
+            android:icon="@android:drawable/ic_search_category_default"
+            android:title="Registrar Licencia"/>
+        <item
+            android:id="@+id/nav_ActualizarLicencia"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Actualizar Licencia"/>
         <item
             android:id="@+id/nav_BuscarLicencia"
             android:icon="@android:drawable/ic_search_category_default"
             android:title="Buscar Licencia"/>
         <item
-            android:id="@+id/nav_SoftwareLibre"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Software libre"/>
-        <item
-            android:id="@+id/nav_SoftwarePrivativo"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Software Privativo" />
-        <item
             android:id="@+id/nav_ListaLicencias"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Lista de licencias" />
+            android:title="Lista de Licencias" />
+
 
     </group>
-
-    <item android:title="Otros">
+</menu>
+    </item>
+    <item android:title="Software">
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/nav_SoftwareLibre"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="Software libre"/>
+                <item
                     android:id="@+id/nav_SoftwareAbierto"
                     android:icon="@drawable/ic_menu_share"
-                    android:title="Software Abierto" />
-                <item
-                    android:id="@+id/nav_Copyleft"
-                    android:icon="@android:drawable/ic_menu_compass"
-                    android:title="Copyleft" />
+                    android:title="Código Abierto" />
                 <item
                     android:id="@+id/nav_CreativeCommons"
                     android:icon="@drawable/ic_menu_send"
                     android:title="Creative Commons" />
+                <item
+                    android:id="@+id/nav_SoftwarePrivativo"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Software Privativo" />
+
                 <item
                     android:id="@+id/nav_LicenciarSoftware"
                     android:icon="@drawable/ic_menu_manage"

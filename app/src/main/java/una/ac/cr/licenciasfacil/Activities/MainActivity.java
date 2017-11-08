@@ -18,13 +18,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ActualizarLicenciaFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciasFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Software.CodigoAbiertoFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Software.CreativeCommonsFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwareLibreFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwarePrivativoFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.IniciarSessionFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RecuperarContrasenaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RegistrarUsuarioFragment;
 import una.ac.cr.licenciasfacil.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,IniciarSessionFragment.OnFragmentInteractionListener, RegistrarUsuarioFragment.OnFragmentInteractionListener ,RecuperarContrasenaFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,IniciarSessionFragment.OnFragmentInteractionListener,
+        RegistrarUsuarioFragment.OnFragmentInteractionListener ,RecuperarContrasenaFragment.OnFragmentInteractionListener,
+        ListaLicenciasFragment.OnFragmentInteractionListener, SoftwareLibreFragment.OnFragmentInteractionListener,
+        SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
+        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener,
+        ActualizarLicenciaFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,24 +112,49 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_IniciarSession) {
             fg=new IniciarSessionFragment();
             cambioFragment=true;
+
         }else if (id == R.id.nav_AgregarCuenta) {
             fg=new RegistrarUsuarioFragment();
             cambioFragment=true;
+
         }else if (id == R.id.nav_RecuperarPass) {
             fg=new RecuperarContrasenaFragment();
             cambioFragment=true;
+
+        }else if (id == R.id.nav_RegistrarLicencia) {
+            fg=new RegistrarLicenciaFragment();
+            cambioFragment=true;
+
+        }else if (id == R.id.nav_ActualizarLicencia) {
+            fg=new ActualizarLicenciaFragment();
+            cambioFragment=true;
+
         }else if (id == R.id.nav_BuscarLicencia) {
-            //
-        }else if (id == R.id.nav_SoftwareLibre) {
-
+            //fg=new ListaLicenciasFragment();
             //cambioFragment=true;
-        }else if (id == R.id.nav_SoftwarePrivativo) {
 
-            //cambioFragment=true;
         }else if (id == R.id.nav_ListaLicencias) {
+            fg=new ListaLicenciasFragment();
+            cambioFragment=true;
 
-            //cambioFragment=true;
+        }else if (id == R.id.nav_SoftwareLibre) {
+            fg=new SoftwareLibreFragment();
+            cambioFragment=true;
+
+        }else if (id == R.id.nav_SoftwareAbierto) {
+            fg = new CodigoAbiertoFragment();
+            cambioFragment = true;
+
+        }else if (id == R.id.nav_CreativeCommons) {
+            fg = new CreativeCommonsFragment();
+            cambioFragment = true;
+
+        }else if (id == R.id.nav_SoftwarePrivativo) {
+            fg = new SoftwarePrivativoFragment();
+            cambioFragment = true;
         }
+
+
 
         if(cambioFragment){
             getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor,fg).commit();

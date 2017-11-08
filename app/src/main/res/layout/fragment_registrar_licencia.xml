@@ -5,29 +5,22 @@
     tools:context="una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:weightSum="1"
-            tools:ignore="MissingConstraints">
+        android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/labelRegistrarLicencia"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgWingx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="Insertar Licencia"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:textColor="#2c3e50"/>
+                android:src="@drawable/wingx"
+                android:paddingTop="30dp"/>
 
             <EditText
                 android:id="@+id/txtNombreLicencia"
@@ -35,8 +28,10 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="#2c3e50"
-                android:text="Nombre" />
+                android:text="Nombre"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
 
             <EditText
                 android:id="@+id/txtVersionLicencia"
@@ -44,8 +39,10 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="#2c3e50"
-                android:text="Version" />
+                android:text="Versión"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
 
             <EditText
                 android:id="@+id/txtTipoLicencia"
@@ -53,37 +50,33 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="#2c3e50"
-                android:text="Tipo" />
+                android:text="Tipo"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
 
             <EditText
-                android:id="@+id/txtDescripcionLicencia"
+                android:id="@+id/txtDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:height="200dp"
                 android:ems="10"
                 android:inputType="textMultiLine"
                 android:text="Descripción"
-                android:textColor="#2c3e50"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/txttSoftwareLicencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="#2c3e50"
-                android:text="Software Utiliza" />
+                android:height="150dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
 
             <Button
-                android:id="@+id/btnInsertarLicencia"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Registrar"
+                android:textColor="#2ecc71"
                 android:background="#ffff"
-                android:gravity="center"
-                android:text="Insertar"
-                android:textColor="#2c3e50" />
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
 
         </LinearLayout>
     </RelativeLayout>
