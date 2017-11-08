@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    >
+
+    <ImageView
+        android:id="@+id/imagenLic"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/background_dark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+
+    <TextView
+        android:id="@+id/txtNombreLicenciaAD"
+        android:layout_width="285dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="2dp"
+        android:hint="Licencia"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/imagenLic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTipoLicenciaAD"
+        android:layout_width="287dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="-9dp"
+        android:hint="Tipo"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@+id/imagenLic"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreLicenciaAD" />
+
+</android.support.constraint.ConstraintLayout>
