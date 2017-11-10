@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import una.ac.cr.licenciasfacil.Clases.Licencia;
+import una.ac.cr.licenciasfacil.Clases.Usuario;
 
 /**
  * Created by root on 07/10/17.
@@ -115,5 +116,103 @@ public class BDOperations {
     }
 
     //TODO---------------------------------------------------------- METODOS DE USUARIO --------------------------------------------------------
+
+    public boolean saveUsuario(Usuario u) {
+
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.Usuario.ID, UUID.randomUUID().toString());
+            values.put(BDContract.Usuario.EMAIL, u.getEmail());
+            values.put(BDContract.Usuario.CONTRASENA, u.getContrasena());
+            values.put(BDContract.Usuario.TIPO, u.getTipo());
+
+            hecho = db.insert(BDContract.Usuario.TABLE_NAME, null, values)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+    public boolean updateUsuario(Usuario u) { //recibe una canción para guardarla o actualizarla
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.Usuario.EMAIL, u.getEmail());
+            values.put(BDContract.Usuario.CONTRASENA, u.getContrasena());
+            values.put(BDContract.Usuario.TIPO, u.getTipo());
+
+            hecho = db.update(BDContract.Licencia.TABLE_NAME,values,BDContract.Usuario.ID+ " = ?",new String[]{u.getId()})>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+    public ArrayList<Usuario> cargarUsuarios(){
+
+        ArrayList<Usuario> lista = new ArrayList<Usuario>();
+        db=BDHelper.getReadableDatabase();
+
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.Usuario.TABLE_NAME,null);
+            if (cursor.moveToFirst()) {//pone el cursor al inicio
+                while (!cursor.isAfterLast()) {//Hasta el Final
+
+                    Usuario u = new Usuario();
+                    u.setId(cursor.getString(cursor.getColumnIndex(BDContract.Usuario.ID)));
+                    u.setEmail(cursor.getString(cursor.getColumnIndex(BDContract.Usuario.EMAIL)));
+                    u.setContrasena(cursor.getString(cursor.getColumnIndex(BDContract.Usuario.CONTRASENA)));
+                    u.setTipo(cursor.getInt(cursor.getColumnIndex(BDContract.Usuario.TIPO)));
+
+                    //Añade la instancia al array de registros
+                    lista.add(u);
+                    cursor.moveToNext();
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public boolean findUsuario(String correo, String pass){
+        db=BDHelper.getReadableDatabase();
+
+        Boolean find =false;
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.Usuario.TABLE_NAME+" WHERE "+BDContract.Usuario.EMAIL+" = "+correo,null);
+            if(cursor!=null) //Si se trajo algo
+            {
+                cursor.moveToFirst();
+                find=true;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return find;
+
+    }
+
+    public boolean deleteUsuario(String id){
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            hecho = db.delete(BDContract.Usuario.TABLE_NAME, BDContract.Usuario.ID + "=" +"'"+ id+"'", null)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return hecho;
+    }
 
 }

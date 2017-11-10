@@ -25,6 +25,7 @@ import una.ac.cr.licenciasfacil.Fragmentos.Software.CreativeCommonsFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwareLibreFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwarePrivativoFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.IniciarSessionFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.ListaUsuariosFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RecuperarContrasenaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RegistrarUsuarioFragment;
 import una.ac.cr.licenciasfacil.R;
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity
         RegistrarUsuarioFragment.OnFragmentInteractionListener ,RecuperarContrasenaFragment.OnFragmentInteractionListener,
         ListaLicenciasFragment.OnFragmentInteractionListener, SoftwareLibreFragment.OnFragmentInteractionListener,
         SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
-        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener
-        {
+        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener,
+        ListaUsuariosFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,10 @@ public class MainActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_RecuperarPass) {
             fg=new RecuperarContrasenaFragment();
+            cambioFragment=true;
+
+        }else if (id == R.id.nav_ListaUsuarios) {
+            fg=new ListaUsuariosFragment();
             cambioFragment=true;
 
         }

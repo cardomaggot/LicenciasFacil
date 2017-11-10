@@ -7,7 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
+import una.ac.cr.licenciasfacil.Clases.Usuario;
 import una.ac.cr.licenciasfacil.R;
 
 /**
@@ -27,6 +32,12 @@ public class RegistrarUsuarioFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView txtUser;
+    TextView txtPass;
+    Button btnRegistrar;
+    BDOperations bd;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +75,49 @@ public class RegistrarUsuarioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registrar_usuario, container, false);
+        View v = inflater.inflate(R.layout.fragment_registrar_usuario, container, false);
+
+        txtUser = (TextView) v.findViewById(R.id.txtEmailUsuario);
+        txtPass = (TextView) v.findViewById(R.id.txtContrasenaUsuario);
+        btnRegistrar= (Button) v.findViewById(R.id.btnRegistrar);
+        bd = new BDOperations(v.getContext());
+
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Registrar();
+            }
+        });
+
+        return  v;
+    }
+
+
+    public void Registrar(){
+        if(txtUser.getText().toString().equals("")){
+            PopUpMensaje("Usuario vacio");
+            return;
+        }
+        if(txtPass.getText().toString().equals("")){
+            PopUpMensaje("Contraseña vacia");
+            return;
+        }
+
+        Usuario u = new Usuario();
+        u.setEmail(txtUser.getText().toString());
+        u.setContrasena(txtPass.getText().toString());
+        u.setTipo(1);
+
+        if(bd.saveUsuario(u)){
+            PopUpMensaje("Se ha insertado el usuario");
+            //finish();
+        }else{
+            PopUpMensaje("No se ha podido insertar el usuario");
+        }
+    }
+
+    public void PopUpMensaje(String msj){
+        Toast.makeText(getContext(),msj,Toast.LENGTH_SHORT).show();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

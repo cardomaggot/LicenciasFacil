@@ -24,7 +24,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:textColor="#2c3e50"
-            android:text="Email Usuario"
+            android:hint="Email Usuario"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
@@ -34,12 +34,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="contraseña"
             android:inputType="textPassword"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
 
         <Button
-            android:id="@+id/btnIniciarSession"
+            android:id="@+id/btnRegistrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

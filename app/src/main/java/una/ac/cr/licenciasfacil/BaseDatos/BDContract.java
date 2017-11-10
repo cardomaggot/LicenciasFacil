@@ -52,6 +52,7 @@ public class BDContract {
         public static final String ID = "id";
         public static final String EMAIL = "email";
         public static final String CONTRASENA = "contrasena";
+        public static final String TIPO = "tipo";
     }
 }
 

@@ -5,9 +5,35 @@
     tools:context="una.ac.cr.licenciasfacil.Fragmentos.Usuarios.ListaUsuariosFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1"
+            tools:ignore="MissingConstraints">
+
+            <Button
+                android:id="@+id/btnInsertarUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffff"
+                android:gravity="center"
+                android:text="Añadir Nueva Usuario"
+                android:textColor="#2c3e50" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+                android:id="@+id/listUsuarios"></ListView>
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </FrameLayout>
