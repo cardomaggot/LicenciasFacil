@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciasFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CodigoAbiertoFragment;
@@ -27,16 +28,15 @@ import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwarePrivativoFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.IniciarSessionFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.ListaUsuariosFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RecuperarContrasenaFragment;
-import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RegistrarUsuarioFragment;
 import una.ac.cr.licenciasfacil.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,IniciarSessionFragment.OnFragmentInteractionListener,
-        RegistrarUsuarioFragment.OnFragmentInteractionListener ,RecuperarContrasenaFragment.OnFragmentInteractionListener,
+        RecuperarContrasenaFragment.OnFragmentInteractionListener,ListaUsuariosFragment.OnFragmentInteractionListener,
         ListaLicenciasFragment.OnFragmentInteractionListener, SoftwareLibreFragment.OnFragmentInteractionListener,
         SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
-        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener,
-        ListaUsuariosFragment.OnFragmentInteractionListener {
+        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener
+        {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -63,7 +64,26 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        //Si es admin
+        if(VariablesGlobales.tipoUsuario.equals("0")){
+            navigationView.getMenu().findItem(R.id.nav_AgregarLicencia).setVisible(false);
+        }
+
+        //Si es usuario o invitado
+        if(VariablesGlobales.tipoUsuario.equals("1") || VariablesGlobales.tipoUsuario.equals("2") ){
+
+            navigationView.getMenu().findItem(R.id.nav_ListaUsuarios).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_RegistrarLicencia).setVisible(false);
+
+            if(VariablesGlobales.tipoUsuario.equals("2")){
+                navigationView.getMenu().findItem(R.id.nav_AgregarLicencia).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_CerrarSesion).setTitle("Salir");
+            }
+        }
+
         getSupportActionBar().setTitle("Licencias Fácil");
+
     }
 
     private long tiempoPrimerClick;
@@ -110,37 +130,18 @@ public class MainActivity extends AppCompatActivity
         boolean cambioFragment=false;
 
         //REGISTRO USUARIO
-        if (id == R.id.nav_IniciarSession) {
-            fg=new IniciarSessionFragment();
-            cambioFragment=true;
-
-        }else if (id == R.id.nav_AgregarCuenta) {
-            fg=new RegistrarUsuarioFragment();
-            cambioFragment=true;
-
-        }else if (id == R.id.nav_RecuperarPass) {
-            fg=new RecuperarContrasenaFragment();
-            cambioFragment=true;
-
-        }else if (id == R.id.nav_ListaUsuarios) {
+        if (id == R.id.nav_ListaUsuarios) {
             fg=new ListaUsuariosFragment();
             cambioFragment=true;
-
         }
-
         //REGISTRO LICENCIAS
         else if (id == R.id.nav_RegistrarLicencia) {
-            fg=new RegistrarLicenciaFragment();
-            cambioFragment=true;
-
-        }else if (id == R.id.nav_BuscarLicencia) {
-            //fg=new ListaLicenciasFragment();
-            //cambioFragment=true;
-
-        }else if (id == R.id.nav_ListaLicencias) {
+            fg = new RegistrarLicenciaFragment();
+            cambioFragment = true;
+        }
+        else if (id == R.id.nav_ListaLicencias) {
             fg=new ListaLicenciasFragment();
             cambioFragment=true;
-
         }
 
         //SOFTWARE
@@ -160,7 +161,11 @@ public class MainActivity extends AppCompatActivity
             fg = new SoftwarePrivativoFragment();
             cambioFragment = true;
         }
-
+        else if (id == R.id.nav_CerrarSesion) {
+            Intent inte = new Intent(MainActivity.this, Login.class);
+            startActivity(inte);
+            finish();
+        }
 
         if(cambioFragment){
             getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor,fg).commit();

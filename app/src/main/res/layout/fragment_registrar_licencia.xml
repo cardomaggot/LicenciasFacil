@@ -10,29 +10,40 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+
+        <EditText
+            android:id="@+id/txtBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/listLicencias"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:hint="Buscar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:id="@+id/btnInsertarLicencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffff"
             android:gravity="center"
-            android:orientation="vertical"
-            android:weightSum="1"
-            tools:ignore="MissingConstraints">
+            android:text="Añadir"
+            android:textColor="#2c3e50"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-            <Button
-                android:id="@+id/btnInsertarLicencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffff"
-                android:gravity="center"
-                android:text="Añadir Nueva Licencia"
-                android:textColor="#2c3e50" />
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:choiceMode="singleChoice"
-                android:id="@+id/listLicencias"></ListView>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:id="@+id/listLicencias"
+            android:layout_below="@+id/btnInsertarLicencia"></ListView>
 
-        </LinearLayout>
     </RelativeLayout>
 
 </FrameLayout>

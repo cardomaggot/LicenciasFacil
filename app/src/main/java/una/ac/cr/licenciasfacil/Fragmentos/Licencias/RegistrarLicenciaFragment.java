@@ -23,6 +23,7 @@ import una.ac.cr.licenciasfacil.Activities.InsertarLicencia;
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
 import una.ac.cr.licenciasfacil.Clases.Licencia;
 import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
+import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.R;
 
 /**
@@ -90,6 +91,10 @@ public class RegistrarLicenciaFragment extends Fragment {
         btnAñadir = (Button) v.findViewById(R.id.btnInsertarLicencia);
         listaLicencias = (ListView) v.findViewById(R.id.listLicencias);
 
+        if(VariablesGlobales.tipoUsuario.equals("1") || VariablesGlobales.tipoUsuario.equals("2")){
+            btnAñadir.setVisibility(View.INVISIBLE);
+        }
+
         bd = new BDOperations(v.getContext());
 
         CargarLista();
@@ -98,17 +103,26 @@ public class RegistrarLicenciaFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 //cambiar de activity y mandarle el id de la licencia que fue seleccionada
-                Intent intent = new Intent(view.getContext(), ActualizarLicencia.class);
-                intent.putExtra("lic",lista.get(position));//se manda el id para en la otra vista poder cargar los datos
-                //intent.putExtra("lista",lista.get(position).getId());
-                startActivity(intent);
+                //ADMIN
+                if(VariablesGlobales.tipoUsuario.equals("0")) {
+                    Intent intent = new Intent(view.getContext(), ActualizarLicencia.class);
+                    intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                    startActivity(intent);
+                }else{
+                    /*Intent intent = new Intent(view.getContext(), VerLicencia.class);
+                    intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                    startActivity(intent);*/
+                }
             }
         });
 
         listaLicencias.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-                mensaje_Si_No(lista.get(position).getId());
+                if(VariablesGlobales.tipoUsuario.equals("0")) {
+                    mensaje_Si_No(lista.get(position).getId());
+
+                }
                 return true;
             }
         });

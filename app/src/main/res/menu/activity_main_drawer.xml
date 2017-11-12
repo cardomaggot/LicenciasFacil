@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Registro Usuarios">
+
+    <item android:title="Usuarios">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_IniciarSession"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="Iniciar Session" />
-                <item
-                    android:id="@+id/nav_AgregarCuenta"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="Agregar Cuenta" />
-                <item
-                    android:id="@+id/nav_RecuperarPass"
-                    android:icon="@android:drawable/ic_menu_compass"
-                    android:title="Recuperar Contraseña" />
-                <item
                     android:id="@+id/nav_ListaUsuarios"
-                    android:icon="@android:drawable/ic_menu_compass"
+                    android:icon="@drawable/ic_usuario"
                     android:title="Lista de Usuarios" />
             </group>
         </menu>
     </item>
-    <item android:title="Registro Licencias">
+    <item android:title="Licencias">
         <menu>
     <group android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/nav_BuscarLicencia"
-            android:icon="@android:drawable/ic_search_category_default"
-            android:title="Buscar Licencia"/>
         <item
             android:id="@+id/nav_ListaLicencias"
             android:icon="@drawable/ic_menu_slideshow"
@@ -38,8 +22,6 @@
             android:id="@+id/nav_RegistrarLicencia"
             android:icon="@android:drawable/ic_search_category_default"
             android:title="Registrar Licencia"/>
-
-
     </group>
 </menu>
     </item>
@@ -64,11 +46,16 @@
                     android:title="Software Privativo" />
 
                 <item
-                    android:id="@+id/nav_LicenciarSoftware"
+                    android:id="@+id/nav_AgregarLicencia"
                     android:icon="@drawable/ic_menu_manage"
-                    android:title="Licenciar mi Software" />
+                    android:title="Sugerir Licencia" />
             </group>
         </menu>
     </item>
+
+    <item
+        android:id="@+id/nav_CerrarSesion"
+        android:icon="@android:drawable/ic_search_category_default"
+        android:title="Cerrar Sesion"/>
 
 </menu>
