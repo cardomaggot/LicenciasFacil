@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import una.ac.cr.licenciasfacil.Activities.ActualizarLicencia;
 import una.ac.cr.licenciasfacil.Activities.InsertarLicencia;
+import una.ac.cr.licenciasfacil.Activities.VerLicencia;
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
 import una.ac.cr.licenciasfacil.Clases.Licencia;
 import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
@@ -116,13 +117,22 @@ public class ListaLicenciaFragment extends Fragment {
                 //cambiar de activity y mandarle el id de la licencia que fue seleccionada
                 //ADMIN
                 if(VariablesGlobales.Usuario.getTipo() == 0) {
-                    Intent intent = new Intent(view.getContext(), ActualizarLicencia.class);
-                    intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                    Intent intent;
+                    if(VariablesGlobales.isListaAprobacion) {
+                        intent = new Intent(view.getContext(), VerLicencia.class);
+                        intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+
+                    }else{
+                        intent = new Intent(view.getContext(), ActualizarLicencia.class);
+                        intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                    }
+
                     startActivityForResult(intent,CHILD_REQUEST);
+
                 }else{
-                    /*Intent intent = new Intent(view.getContext(), VerLicencia.class);
+                    Intent intent = new Intent(view.getContext(), VerLicencia.class);
                     intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
-                    startActivity(intent);*/
+                    startActivity(intent);
                 }
             }
         });
@@ -130,9 +140,8 @@ public class ListaLicenciaFragment extends Fragment {
         listaLicencias.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-                if(VariablesGlobales.Usuario.getTipo() == 0) {
+                if(VariablesGlobales.Usuario.getTipo() == 0 && !VariablesGlobales.isListaAprobacion) {
                     mensaje_Si_No(lista.get(position).getId());
-
                 }
                 return true;
             }
@@ -168,7 +177,11 @@ public class ListaLicenciaFragment extends Fragment {
 
 
     public void CargarLista(){
-        lista = bd.cargarLicencias();
+        if(VariablesGlobales.isListaAprobacion) {
+            //lista = bd.cargarLicenciasAprobacion();
+        }else
+            lista = bd.cargarLicencias();
+
         adapter = new LicenciaAdapter(getActivity(), lista);
         listaLicencias.setAdapter(adapter);
     }

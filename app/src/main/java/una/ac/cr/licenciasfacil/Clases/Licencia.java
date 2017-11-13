@@ -15,6 +15,8 @@ public class Licencia implements Serializable {
     String tipo="";
     String software="";//el sotfware que la utiliza
 
+    String usuario="";//Si es una licencia por aprobar tendra usuario
+    String imagen="";//nombre de la imagen para luego buscarla en la carpeta de imagenes y mostrarla
 
     public String getId() {
         return id;
@@ -62,5 +64,21 @@ public class Licencia implements Serializable {
 
     public void setSoftware(String software) {
         this.software = software;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

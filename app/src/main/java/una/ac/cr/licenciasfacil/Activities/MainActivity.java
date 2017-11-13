@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity
         if(VariablesGlobales.Usuario.getTipo() == 1 || VariablesGlobales.Usuario.getTipo() == 2 ){
 
             navigationView.getMenu().findItem(R.id.nav_ListaUsuarios).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_LicenciasAprobar).setVisible(false);
 
             if(VariablesGlobales.Usuario.getTipo() == 2){
                 navigationView.getMenu().findItem(R.id.nav_AgregarLicencia).setVisible(false);
@@ -136,8 +137,19 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_ListaLicencias) {
             fg=new ListaLicenciaFragment();
             cambioFragment=true;
-        }
+            VariablesGlobales.isListaAprobacion=false;
 
+        }else if (id == R.id.nav_LicenciasAprobar) {
+            fg=new ListaLicenciaFragment();
+            cambioFragment=true;
+            VariablesGlobales.isListaAprobacion=true;
+
+        }else if (id == R.id.nav_AgregarLicencia) {
+            /*fg=new InsertarLicenciaFragment();
+            cambioFragment=true;
+            VariablesGlobales.isListaAprobacion=true;
+            */
+        }
         //SOFTWARE
         else if (id == R.id.nav_SoftwareLibre) {
             fg=new SoftwareLibreFragment();
