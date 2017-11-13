@@ -19,8 +19,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
-import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciasFragment;
-import una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CodigoAbiertoFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CreativeCommonsFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwareLibreFragment;
@@ -33,9 +32,9 @@ import una.ac.cr.licenciasfacil.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,IniciarSessionFragment.OnFragmentInteractionListener,
         RecuperarContrasenaFragment.OnFragmentInteractionListener,ListaUsuariosFragment.OnFragmentInteractionListener,
-        ListaLicenciasFragment.OnFragmentInteractionListener, SoftwareLibreFragment.OnFragmentInteractionListener,
+        SoftwareLibreFragment.OnFragmentInteractionListener,ListaLicenciaFragment.OnFragmentInteractionListener,
         SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
-        CodigoAbiertoFragment.OnFragmentInteractionListener, RegistrarLicenciaFragment.OnFragmentInteractionListener
+        CodigoAbiertoFragment.OnFragmentInteractionListener
         {
 
     @Override
@@ -66,17 +65,16 @@ public class MainActivity extends AppCompatActivity
 
 
         //Si es admin
-        if(VariablesGlobales.tipoUsuario.equals("0")){
+        if(VariablesGlobales.Usuario.getTipo() == 0){
             navigationView.getMenu().findItem(R.id.nav_AgregarLicencia).setVisible(false);
         }
 
         //Si es usuario o invitado
-        if(VariablesGlobales.tipoUsuario.equals("1") || VariablesGlobales.tipoUsuario.equals("2") ){
+        if(VariablesGlobales.Usuario.getTipo() == 1 || VariablesGlobales.Usuario.getTipo() == 2 ){
 
             navigationView.getMenu().findItem(R.id.nav_ListaUsuarios).setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_RegistrarLicencia).setVisible(false);
 
-            if(VariablesGlobales.tipoUsuario.equals("2")){
+            if(VariablesGlobales.Usuario.getTipo() == 2){
                 navigationView.getMenu().findItem(R.id.nav_AgregarLicencia).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_CerrarSesion).setTitle("Salir");
             }
@@ -135,12 +133,8 @@ public class MainActivity extends AppCompatActivity
             cambioFragment=true;
         }
         //REGISTRO LICENCIAS
-        else if (id == R.id.nav_RegistrarLicencia) {
-            fg = new RegistrarLicenciaFragment();
-            cambioFragment = true;
-        }
         else if (id == R.id.nav_ListaLicencias) {
-            fg=new ListaLicenciasFragment();
+            fg=new ListaLicenciaFragment();
             cambioFragment=true;
         }
 

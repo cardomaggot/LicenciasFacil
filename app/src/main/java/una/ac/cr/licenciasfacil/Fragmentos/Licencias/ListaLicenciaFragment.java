@@ -7,16 +7,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import una.ac.cr.licenciasfacil.Activities.ActualizarLicencia;
 import una.ac.cr.licenciasfacil.Activities.InsertarLicencia;
@@ -29,12 +32,12 @@ import una.ac.cr.licenciasfacil.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link RegistrarLicenciaFragment.OnFragmentInteractionListener} interface
+ * {@link ListaLicenciaFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link RegistrarLicenciaFragment#newInstance} factory method to
+ * Use the {@link ListaLicenciaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RegistrarLicenciaFragment extends Fragment {
+public class ListaLicenciaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,13 +48,15 @@ public class RegistrarLicenciaFragment extends Fragment {
     private String mParam2;
 
     Button btnAñadir;
+    TextView txtBuscar;
     ListView listaLicencias;
     ArrayList<Licencia> lista = new ArrayList<>();
+    LicenciaAdapter adapter;
     BDOperations bd;
 
     private OnFragmentInteractionListener mListener;
 
-    public RegistrarLicenciaFragment() {
+    public ListaLicenciaFragment() {
         // Required empty public constructor
     }
 
@@ -61,11 +66,11 @@ public class RegistrarLicenciaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment RegistrarLicenciaFragment.
+     * @return A new instance of fragment ListaLicenciaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RegistrarLicenciaFragment newInstance(String param1, String param2) {
-        RegistrarLicenciaFragment fragment = new RegistrarLicenciaFragment();
+    public static ListaLicenciaFragment newInstance(String param1, String param2) {
+        ListaLicenciaFragment fragment = new ListaLicenciaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,12 +91,13 @@ public class RegistrarLicenciaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_registrar_licencia, container, false);
+        View v = inflater.inflate(R.layout.fragment_lista_licencia, container, false);
 
         btnAñadir = (Button) v.findViewById(R.id.btnInsertarLicencia);
         listaLicencias = (ListView) v.findViewById(R.id.listLicencias);
+        txtBuscar = (TextView) v.findViewById(R.id.txtBuscar);
 
-        if(VariablesGlobales.tipoUsuario.equals("1") || VariablesGlobales.tipoUsuario.equals("2")){
+        if(VariablesGlobales.Usuario.getTipo() == 1 || VariablesGlobales.Usuario.getTipo() == 2){
             btnAñadir.setVisibility(View.INVISIBLE);
         }
 
@@ -104,7 +110,7 @@ public class RegistrarLicenciaFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 //cambiar de activity y mandarle el id de la licencia que fue seleccionada
                 //ADMIN
-                if(VariablesGlobales.tipoUsuario.equals("0")) {
+                if(VariablesGlobales.Usuario.getTipo() == 0) {
                     Intent intent = new Intent(view.getContext(), ActualizarLicencia.class);
                     intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
                     startActivity(intent);
@@ -119,11 +125,28 @@ public class RegistrarLicenciaFragment extends Fragment {
         listaLicencias.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-                if(VariablesGlobales.tipoUsuario.equals("0")) {
+                if(VariablesGlobales.Usuario.getTipo() == 0) {
                     mensaje_Si_No(lista.get(position).getId());
 
                 }
                 return true;
+            }
+        });
+
+        txtBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -141,7 +164,7 @@ public class RegistrarLicenciaFragment extends Fragment {
 
     public void CargarLista(){
         lista = bd.cargarLicencias();
-        LicenciaAdapter adapter = new LicenciaAdapter(getActivity(), lista);
+        adapter = new LicenciaAdapter(getActivity(), lista);
         listaLicencias.setAdapter(adapter);
     }
 

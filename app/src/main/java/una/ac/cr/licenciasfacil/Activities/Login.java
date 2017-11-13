@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
+import una.ac.cr.licenciasfacil.Clases.Usuario;
 import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.R;
 
@@ -37,17 +38,19 @@ public class Login extends AppCompatActivity {
         findViewById(R.id.txtInvitado).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VariablesGlobales.tipoUsuario="2";
+                Usuario u = new Usuario();
+                u.setTipo(2);
+                VariablesGlobales.Usuario = u;
                 Intent inte = new Intent(Login.this,MainActivity.class);
                 startActivity(inte);
                 finish();
             }
         });
+        VariablesGlobales.Usuario = null;
     }
 
 
     public void Iniciar(View v){
-        /*
 
         if(usuario.getText().toString().trim().equals("")){
             PopUpMensaje("Debe digitar el Usuario");
@@ -58,15 +61,16 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        //Usuario u= db.findUsuario(usuario.getText().toString(),pass.getText().toString());
+        Usuario u= db.findUsuario(usuario.getText().toString(),pass.getText().toString());
         //Hacer la consulta a la base de datos para sacar el tipo de usuario
-        VariablesGlobales.Usuario=u.getEmail();
-        VariablesGlobales.tipoUsuario=u.getTipo();
-        */
-        VariablesGlobales.tipoUsuario="0";
-        Intent inte = new Intent(Login.this,MainActivity.class);
-        startActivity(inte);
-        finish();
+        if(u != null) {
+            VariablesGlobales.Usuario = u;
+
+            Intent inte = new Intent(Login.this, MainActivity.class);
+            startActivity(inte);
+            finish();
+        }else
+            PopUpMensaje("Usuario Incorrecto");
     }
 
     public void PopUpMensaje(String msj){

@@ -46,7 +46,7 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
         //imagen.setBackground(R.drawable."usuario.imagen");algo asi es
         txtUsuario.setText(usuario.getEmail());
-        if(usuario.getTipo()==1)
+        if(usuario.getTipo()==0)
             txtTipo.setText("Admin");
         else
             txtTipo.setText("Simple");

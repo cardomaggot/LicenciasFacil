@@ -185,22 +185,25 @@ public class BDOperations {
         return lista;
     }
 
-    public boolean findUsuario(String correo, String pass){
+    public Usuario findUsuario(String correo, String pass){
         db=BDHelper.getReadableDatabase();
 
-        Boolean find =false;
+        Usuario u =null;
         try {
-            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.Usuario.TABLE_NAME+" WHERE "+BDContract.Usuario.EMAIL+" = "+correo,null);
-            if(cursor!=null) //Si se trajo algo
+            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.Usuario.TABLE_NAME+" WHERE "+BDContract.Usuario.EMAIL+" = '"+correo+"' AND "+BDContract.Usuario.CONTRASENA+" = '"+pass+"'",null);
+            if(cursor.moveToFirst()) //Si se trajo algo
             {
-                cursor.moveToFirst();
-                find=true;
+                u = new Usuario();
+                u.setId(cursor.getString(cursor.getColumnIndex(BDContract.Usuario.ID)));
+                u.setEmail(cursor.getString(cursor.getColumnIndex(BDContract.Usuario.EMAIL)));
+                u.setContrasena(cursor.getString(cursor.getColumnIndex(BDContract.Usuario.CONTRASENA)));
+                u.setTipo(cursor.getInt(cursor.getColumnIndex(BDContract.Usuario.TIPO)));
             }
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return find;
+        return u;
 
     }
 

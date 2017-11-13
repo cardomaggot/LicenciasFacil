@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     TextView txtUser;
     TextView txtPass;
     Button btnRegistrar;
+    CheckBox check;
     BDOperations bd;
 
     @Override
@@ -26,8 +30,10 @@ public class RegistrarUsuario extends AppCompatActivity {
 
         txtUser = (TextView) findViewById(R.id.txtEmailUsuario);
         txtPass = (TextView) findViewById(R.id.txtContrasenaUsuario);
+        check = (CheckBox) findViewById(R.id.checkBox);
         btnRegistrar= (Button) findViewById(R.id.btnRegistrar);
         bd = new BDOperations(this);
+
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +54,19 @@ public class RegistrarUsuario extends AppCompatActivity {
             return;
         }
 
+
+
         Usuario u = new Usuario();
         u.setEmail(txtUser.getText().toString());
         u.setContrasena(txtPass.getText().toString());
-        u.setTipo(1);
+        if(check.isChecked())
+            u.setTipo(0);//admin
+        else
+            u.setTipo(1);//normal
 
         if(bd.saveUsuario(u)){
-            PopUpMensaje("Se ha insertado el usuario");
-            //finish();
+            PopUpMensaje("Se ha registrado el usuario");
+            finish();
         }else{
             PopUpMensaje("No se ha podido insertar el usuario");
         }

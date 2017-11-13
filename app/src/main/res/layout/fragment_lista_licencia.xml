@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="una.ac.cr.licenciasfacil.Fragmentos.Licencias.RegistrarLicenciaFragment">
+    tools:context="una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciaFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -22,6 +22,7 @@
             android:inputType="textPersonName"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:hint="Buscar"
+            android:layout_toLeftOf="@+id/btnInsertarLicencia"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -29,7 +30,7 @@
             android:id="@+id/btnInsertarLicencia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#ffff"
+            android:background="@null"
             android:gravity="center"
             android:text="Añadir"
             android:textColor="#2c3e50"
