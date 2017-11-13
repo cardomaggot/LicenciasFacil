@@ -35,10 +35,10 @@ public class RegistrarUsuario extends AppCompatActivity {
         btnRegistrar= (Button) findViewById(R.id.btnRegistrar);
         bd = new BDOperations(this);
 
-        if(VariablesGlobales.Usuario == null){
+        /*if(VariablesGlobales.Usuario == null){
             check.setVisibility(View.INVISIBLE);
             check.setChecked(false);
-        }
+        }*/
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override

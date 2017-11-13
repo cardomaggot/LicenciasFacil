@@ -44,6 +44,8 @@ public class BDOperations {
             values.put(BDContract.Licencia.TIPO, lc.getTipo());
             values.put(BDContract.Licencia.DESCRIPCION, lc.getDescripcion());
             values.put(BDContract.Licencia.SOFTWARE, lc.getSoftware());
+            //values.put(BDContract.Licencia.IMAGEN, lc.getImagen());
+
 
             hecho = db.insert(BDContract.Licencia.TABLE_NAME, null, values)>0;
         }catch (Exception e){
@@ -53,7 +55,7 @@ public class BDOperations {
         return hecho;
     }
 
-    public boolean updateLicencia(Licencia lc) { //recibe una canción para guardarla o actualizarla
+    public boolean updateLicencia(Licencia lc) {
         boolean hecho=false;
         try {
             db = BDHelper.getWritableDatabase();
@@ -65,6 +67,7 @@ public class BDOperations {
             values.put(BDContract.Licencia.DESCRIPCION, lc.getDescripcion());
             values.put(BDContract.Licencia.TIPO, lc.getTipo());
             values.put(BDContract.Licencia.SOFTWARE, lc.getSoftware());
+            //values.put(BDContract.Licencia.IMAGEN, lc.getImagen());
 
              hecho = db.update(BDContract.Licencia.TABLE_NAME,values,BDContract.Licencia.ID+ " = ?",new String[]{lc.getId()})>0;
         }catch (Exception e){
@@ -91,6 +94,8 @@ public class BDOperations {
                     l.setDescripcion(cursor.getString(cursor.getColumnIndex(BDContract.Licencia.DESCRIPCION)));
                     l.setTipo(cursor.getString(cursor.getColumnIndex(BDContract.Licencia.TIPO)));
                     l.setSoftware(cursor.getString(cursor.getColumnIndex(BDContract.Licencia.SOFTWARE)));
+                    //l.setImagen(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.IMAGEN)));
+
 
                     //Añade la instancia al array de registros
                     lista.add(l);
@@ -207,6 +212,23 @@ public class BDOperations {
 
     }
 
+    public String extraerNombreUsuario(String id){
+        db=BDHelper.getReadableDatabase();
+
+        String u ="";
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.Usuario.TABLE_NAME+" WHERE "+BDContract.Usuario.ID+" = '"+id+"'",null);
+            if(cursor.moveToFirst()) //Si se trajo algo
+            {
+                u = cursor.getString(cursor.getColumnIndex(BDContract.Usuario.EMAIL));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return u;
+    }
+
     public boolean deleteUsuario(String id){
         boolean hecho=false;
         try {
@@ -217,5 +239,101 @@ public class BDOperations {
         }
         return hecho;
     }
+
+
+    //TODO---------------------------------------------------------- METODOS DE LA LICENCIA --------------------------------------------------------
+
+    public boolean saveLicenciaApro(Licencia lc) {
+
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.LicenciaAprobacion.ID, UUID.randomUUID().toString());
+            values.put(BDContract.LicenciaAprobacion.NOMBRE, lc.getNombre());
+            values.put(BDContract.LicenciaAprobacion.VERSION, lc.getVersion());
+            values.put(BDContract.LicenciaAprobacion.TIPO, lc.getTipo());
+            values.put(BDContract.LicenciaAprobacion.DESCRIPCION, lc.getDescripcion());
+            values.put(BDContract.LicenciaAprobacion.SOFTWARE, lc.getSoftware());
+            values.put(BDContract.LicenciaAprobacion.USUARIO, lc.getUsuario());
+            //values.put(BDContract.LicenciaAprobacion.IMAGEN, lc.getImagen());
+
+
+            hecho = db.insert(BDContract.LicenciaAprobacion.TABLE_NAME, null, values)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+    public boolean updateLicenciaApro(Licencia lc) {
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.LicenciaAprobacion.NOMBRE, lc.getNombre());
+            values.put(BDContract.LicenciaAprobacion.VERSION, lc.getVersion());
+            values.put(BDContract.LicenciaAprobacion.TIPO, lc.getTipo());
+            values.put(BDContract.LicenciaAprobacion.DESCRIPCION, lc.getDescripcion());
+            values.put(BDContract.LicenciaAprobacion.SOFTWARE, lc.getSoftware());
+            values.put(BDContract.LicenciaAprobacion.USUARIO, lc.getSoftware());
+            //values.put(BDContract.LicenciaAprobacion.IMAGEN, lc.getImagen());
+
+            hecho = db.update(BDContract.LicenciaAprobacion.TABLE_NAME,values,BDContract.LicenciaAprobacion.ID+ " = ?",new String[]{lc.getId()})>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+    public ArrayList<Licencia> cargarLicenciasApro(){
+
+        ArrayList<Licencia> lista = new ArrayList<Licencia>();
+        db=BDHelper.getReadableDatabase();
+
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.LicenciaAprobacion.TABLE_NAME,null);
+            if (cursor.moveToFirst()) {//pone el cursor al inicio
+                while (!cursor.isAfterLast()) {//Hasta el Final
+
+                    Licencia l = new Licencia();
+                    l.setId(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.ID)));
+                    l.setNombre(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.NOMBRE)));
+                    l.setVersion(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.VERSION)));
+                    l.setDescripcion(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.DESCRIPCION)));
+                    l.setTipo(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.TIPO)));
+                    l.setSoftware(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.SOFTWARE)));
+                    l.setUsuario(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.USUARIO)));
+                    //l.setImagen(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.IMAGEN)));
+
+                    //Añade la instancia al array de registros
+                    lista.add(l);
+                    cursor.moveToNext();
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public boolean deleteLicenciaApro(String id){
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            hecho = db.delete(BDContract.LicenciaAprobacion.TABLE_NAME, BDContract.LicenciaAprobacion.ID + "=" +"'"+ id+"'", null)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return hecho;
+    }
+
 
 }

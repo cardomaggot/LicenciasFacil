@@ -103,7 +103,7 @@ public class ListaLicenciaFragment extends Fragment {
         listaLicencias = (ListView) v.findViewById(R.id.listLicencias);
         txtBuscar = (TextView) v.findViewById(R.id.txtBuscar);
 
-        if(VariablesGlobales.Usuario.getTipo() == 1 || VariablesGlobales.Usuario.getTipo() == 2){
+        if(VariablesGlobales.Usuario.getTipo() == 1 || VariablesGlobales.Usuario.getTipo() == 2 || VariablesGlobales.isListaAprobacion){
             btnAñadir.setVisibility(View.INVISIBLE);
         }
 
@@ -178,7 +178,7 @@ public class ListaLicenciaFragment extends Fragment {
 
     public void CargarLista(){
         if(VariablesGlobales.isListaAprobacion) {
-            //lista = bd.cargarLicenciasAprobacion();
+            lista = bd.cargarLicenciasApro();
         }else
             lista = bd.cargarLicencias();
 

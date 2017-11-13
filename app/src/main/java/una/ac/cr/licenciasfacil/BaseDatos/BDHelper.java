@@ -12,7 +12,7 @@ import android.os.Build;
 
 public class BDHelper extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION=2;
+    public static final int DATABASE_VERSION=3;
     public static final String DATABASE_NAME="Licencias.db"; //Le pone el nombre de la base de datos, es un archivo físico
     //Si ve que no existe va al onCreate y la crea
 
@@ -45,7 +45,7 @@ public class BDHelper extends SQLiteOpenHelper{
             db.execSQL(SQL_CREATE_USUARIOS);
             //db.execSQL(SQL_CREATE_LIKES);
             //db.execSQL(SQL_CREATE_COMENTARIOS);
-            //db.execSQL(SQL_CREATE_LICENCIASAPROBAR);
+            db.execSQL(SQL_CREATE_LICENCIASAPROBAR);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -95,17 +95,21 @@ public class BDHelper extends SQLiteOpenHelper{
             BDContract.Licencia.VERSION + " TEXT, "+
             BDContract.Licencia.TIPO + " TEXT,"+
             BDContract.Licencia.DESCRIPCION + " TEXT," +
+            //BDContract.Licencia.IMAGEN + " TEXT, "+
             BDContract.Licencia.SOFTWARE + " TEXT "+
             ")";
 
     public static final String SQL_CREATE_LICENCIASAPROBAR = "CREATE TABLE " +
             BDContract.LicenciaAprobacion.TABLE_NAME + " ( " +
             BDContract.LicenciaAprobacion.ID+ " TEXT PRIMARY KEY, " +//Verificar el ID
-            BDContract.LicenciaAprobacion.USUARIO+ " TEXT, "+ //Verificar el ID que coincida con la PK de la tabla USUARIOS
             BDContract.LicenciaAprobacion.NOMBRE + " TEXT, "+
-            BDContract.LicenciaAprobacion.DESCRIPCION + " TEXT, "+
+            BDContract.LicenciaAprobacion.VERSION + " TEXT, "+
             BDContract.LicenciaAprobacion.TIPO + " TEXT, " +
-            "FOREIGN KEY(usuario) REFERENCES usuarios(id)"+
+            BDContract.LicenciaAprobacion.DESCRIPCION + " TEXT, "+
+            BDContract.LicenciaAprobacion.SOFTWARE + " TEXT, "+
+            //BDContract.LicenciaAprobacion.IMAGEN + " TEXT, "+
+            BDContract.LicenciaAprobacion.USUARIO+ " TEXT, "+//Verificar el ID que coincida con la PK de la tabla USUARIOS
+            "FOREIGN KEY (usuario) REFERENCES usuarios (id)"+
             ")";
 
     public static final String SQL_CREATE_LIKES = "CREATE TABLE " +

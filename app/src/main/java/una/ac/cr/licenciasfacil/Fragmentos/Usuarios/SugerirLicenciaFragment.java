@@ -7,8 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
+import una.ac.cr.licenciasfacil.Clases.Licencia;
+import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.R;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +35,14 @@ public class SugerirLicenciaFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView txtNombre;
+    TextView txtVersion;
+    TextView txtTipo;
+    TextView txtDescripcion;
+    TextView txtSoftware;
+    Button btnSugerir;
+    BDOperations bd;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,9 +80,76 @@ public class SugerirLicenciaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sugerir_licencia, container, false);
+        View v = inflater.inflate(R.layout.fragment_sugerir_licencia, container, false);
+
+        txtNombre = (TextView) v.findViewById(R.id.txtNombreLicencia);
+        txtVersion = (TextView) v.findViewById(R.id.txtVersionLicencia);
+        txtTipo = (TextView) v.findViewById(R.id.txtTipoLicencia);
+        txtDescripcion = (TextView) v.findViewById(R.id.txtDescripcionLicencia);
+        txtSoftware = (TextView) v.findViewById(R.id.txtSoftwareLicencia);
+        btnSugerir = (Button) v.findViewById(R.id.btnSugerir);
+
+        btnSugerir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sugerir();
+            }
+        });
+
+        bd = new BDOperations(v.getContext());
+
+        return v;
     }
+
+
+    public void Sugerir(){
+        if(txtNombre.getText().toString().equals("")){
+            PopUpMensaje("Nombre vacio");
+            return;
+        }
+        if(txtVersion.getText().toString().equals("")){
+            PopUpMensaje("Version vacio");
+            return;
+        }
+        if(txtTipo.getText().toString().equals("")){
+            PopUpMensaje("Tipo vacio");
+            return;
+        }
+        if(txtDescripcion.getText().toString().equals("")){
+            PopUpMensaje("Descripcion vacio");
+            return;
+        }
+        if(txtSoftware.getText().toString().equals("")){
+            PopUpMensaje("Software vacio");
+            return;
+        }
+
+        Licencia lc = new Licencia();
+        lc.setNombre(txtNombre.getText().toString());
+        lc.setVersion(txtVersion.getText().toString());
+        lc.setDescripcion(txtDescripcion.getText().toString());
+        lc.setTipo(txtTipo.getText().toString());
+        lc.setSoftware(txtSoftware.getText().toString());
+        lc.setUsuario(VariablesGlobales.Usuario.getId());
+
+        if(bd.saveLicenciaApro(lc)){
+            PopUpMensaje("Se ha insertado la licencia para ser revisada por el administrador");
+            //LimpiarCampos
+            txtNombre.setText("");
+            txtVersion.setText("");
+            txtDescripcion.setText("");
+            txtTipo.setText("");
+            txtSoftware.setText("");
+        }else{
+            PopUpMensaje("No se ha podido insertar la Licencia");
+        }
+    }
+
+
+    public void PopUpMensaje(String msj){
+        Toast.makeText(getActivity(),msj,Toast.LENGTH_SHORT).show();
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
