@@ -52,6 +52,10 @@ public class VerLicencia extends AppCompatActivity {
             btnRechazar.setVisibility(View.INVISIBLE);
         }
 
+        if(!VariablesGlobales.isListaAprobacion && VariablesGlobales.Usuario.getTipo()==2){
+            //MOSTRAR PARA COMENTARIOS  Y LIKES
+        }
+
     }
 
     public void Rechazar(View view){

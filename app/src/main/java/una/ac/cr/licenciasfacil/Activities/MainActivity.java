@@ -24,17 +24,15 @@ import una.ac.cr.licenciasfacil.Fragmentos.Software.CodigoAbiertoFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CreativeCommonsFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwareLibreFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwarePrivativoFragment;
-import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.IniciarSessionFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.ListaUsuariosFragment;
-import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.RecuperarContrasenaFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Usuarios.SugerirLicenciaFragment;
 import una.ac.cr.licenciasfacil.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,IniciarSessionFragment.OnFragmentInteractionListener,
-        RecuperarContrasenaFragment.OnFragmentInteractionListener,ListaUsuariosFragment.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener,ListaUsuariosFragment.OnFragmentInteractionListener,
         SoftwareLibreFragment.OnFragmentInteractionListener,ListaLicenciaFragment.OnFragmentInteractionListener,
         SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
-        CodigoAbiertoFragment.OnFragmentInteractionListener
+        CodigoAbiertoFragment.OnFragmentInteractionListener,SugerirLicenciaFragment.OnFragmentInteractionListener
         {
 
     @Override
@@ -145,10 +143,10 @@ public class MainActivity extends AppCompatActivity
             VariablesGlobales.isListaAprobacion=true;
 
         }else if (id == R.id.nav_AgregarLicencia) {
-            /*fg=new InsertarLicenciaFragment();
+            fg=new SugerirLicenciaFragment();
             cambioFragment=true;
             VariablesGlobales.isListaAprobacion=true;
-            */
+
         }
         //SOFTWARE
         else if (id == R.id.nav_SoftwareLibre) {
