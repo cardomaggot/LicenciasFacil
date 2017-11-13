@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import una.ac.cr.licenciasfacil.Clases.Usuario;
 import una.ac.cr.licenciasfacil.R;
@@ -22,9 +24,14 @@ import una.ac.cr.licenciasfacil.R;
 public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
     Context context;
+    private List<Usuario>originalData = null;
+    private List<Usuario>filteredData = null;
+    private UsuarioAdapter.ItemFilter mFilter = new UsuarioAdapter.ItemFilter();
 
     public UsuarioAdapter (Context context, ArrayList<Usuario> usuarios){
         super(context,0,usuarios);
+        this.filteredData = usuarios ;
+        this.originalData = usuarios ;
         this.context=context;
     }
 
@@ -52,5 +59,54 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
             txtTipo.setText("Simple");
 
         return convertView;
+    }
+
+    public int getCount() {
+        return filteredData.size();
+    }
+
+    public Usuario getItem(int position) {
+        return filteredData.get(position);
+    }
+
+    public Filter getFilter() {
+        return mFilter;
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final List<Usuario> list = originalData;
+
+            int count = list.size();
+            final ArrayList<Usuario> nlist = new ArrayList<Usuario>(count);
+
+            Usuario filterableString ;
+
+            for (int i = 0; i < count; i++) {
+                filterableString = list.get(i);
+                if (filterableString.getEmail().toLowerCase().contains(filterString)) {
+                    nlist.add(filterableString);
+                }
+            }
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredData = (ArrayList<Usuario>) results.values;
+            notifyDataSetChanged();
+        }
+
     }
 }

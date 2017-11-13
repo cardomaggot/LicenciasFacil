@@ -79,6 +79,7 @@ public class ActualizarLicencia extends AppCompatActivity {
 
         if(bd.updateLicencia(lc)){
             PopUpMensaje("Se ha Actualizado la Licencia");
+            setResult(RESULT_OK);
             finish();
         }else{
             PopUpMensaje("No se ha podido Actualizar la Licencia");

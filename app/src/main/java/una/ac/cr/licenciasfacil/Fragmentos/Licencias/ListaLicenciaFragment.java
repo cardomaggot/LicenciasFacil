@@ -29,6 +29,9 @@ import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
 import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.R;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -53,6 +56,8 @@ public class ListaLicenciaFragment extends Fragment {
     ArrayList<Licencia> lista = new ArrayList<>();
     LicenciaAdapter adapter;
     BDOperations bd;
+
+    private static final int CHILD_REQUEST = 0;
 
     private OnFragmentInteractionListener mListener;
 
@@ -113,7 +118,7 @@ public class ListaLicenciaFragment extends Fragment {
                 if(VariablesGlobales.Usuario.getTipo() == 0) {
                     Intent intent = new Intent(view.getContext(), ActualizarLicencia.class);
                     intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
-                    startActivity(intent);
+                    startActivityForResult(intent,CHILD_REQUEST);
                 }else{
                     /*Intent intent = new Intent(view.getContext(), VerLicencia.class);
                     intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
@@ -154,7 +159,7 @@ public class ListaLicenciaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent inte = new Intent(v.getContext(), InsertarLicencia.class);
-                startActivity(inte);
+                startActivityForResult(inte,CHILD_REQUEST);
             }
         });
 
@@ -168,7 +173,45 @@ public class ListaLicenciaFragment extends Fragment {
         listaLicencias.setAdapter(adapter);
     }
 
+    public void mensaje_Si_No(final String idLic){
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
+        dialogo1.setTitle("Atención");
+        dialogo1.setMessage("¿Desea Eliminar la Licencia ?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                if(bd.deleteLicencia(idLic))
+                    Toast.makeText(getActivity(),"Se ha eliminado la licencia",Toast.LENGTH_SHORT);
+                else
+                    Toast.makeText(getActivity(),"No se ha podido eliminar la licencia",Toast.LENGTH_SHORT);
 
+                CargarLista();
+            }
+        });
+        dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.dismiss();
+            }
+        });
+        dialogo1.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHILD_REQUEST){
+            switch (resultCode) {
+                case RESULT_OK: {
+                    CargarLista();
+                    break;
+                }
+
+                case RESULT_CANCELED: {
+                    // Cancelación o cualquier situación de error
+                    break;
+                }
+            }
+        }
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -209,28 +252,5 @@ public class ListaLicenciaFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-
-    public void mensaje_Si_No(final String idLic){
-        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
-        dialogo1.setTitle("Atención");
-        dialogo1.setMessage("¿Desea Eliminar la Licencia ?");
-        dialogo1.setCancelable(false);
-        dialogo1.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogo1, int id) {
-                if(bd.deleteLicencia(idLic))
-                    Toast.makeText(getActivity(),"Se ha eliminado la licencia",Toast.LENGTH_SHORT);
-                else
-                    Toast.makeText(getActivity(),"No se ha podido eliminar la licencia",Toast.LENGTH_SHORT);
-
-                CargarLista();
-            }
-        });
-        dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogo1, int id) {
-                dialogo1.dismiss();
-            }
-        });
-        dialogo1.show();
-    }
 
 }

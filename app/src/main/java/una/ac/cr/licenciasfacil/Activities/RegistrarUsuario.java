@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
 import una.ac.cr.licenciasfacil.Clases.Usuario;
+import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.R;
 
 public class RegistrarUsuario extends AppCompatActivity {
@@ -34,6 +35,10 @@ public class RegistrarUsuario extends AppCompatActivity {
         btnRegistrar= (Button) findViewById(R.id.btnRegistrar);
         bd = new BDOperations(this);
 
+        if(VariablesGlobales.Usuario == null){
+            check.setVisibility(View.INVISIBLE);
+            check.setChecked(false);
+        }
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +71,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
         if(bd.saveUsuario(u)){
             PopUpMensaje("Se ha registrado el usuario");
+            setResult(RESULT_OK);
             finish();
         }else{
             PopUpMensaje("No se ha podido insertar el usuario");
@@ -74,8 +80,11 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent inte = new Intent(RegistrarUsuario.this, Login.class);
-        startActivity(inte);
+
+        if(VariablesGlobales.Usuario == null) {
+            Intent inte = new Intent(RegistrarUsuario.this, Login.class);
+            startActivity(inte);
+        }
         finish();
     }
 

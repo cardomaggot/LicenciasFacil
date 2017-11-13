@@ -7,21 +7,29 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import una.ac.cr.licenciasfacil.Activities.RegistrarUsuario;
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
 import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
 import una.ac.cr.licenciasfacil.Clases.Usuario;
 import una.ac.cr.licenciasfacil.Clases.UsuarioAdapter;
+import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.R;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,9 +50,13 @@ public class ListaUsuariosFragment extends Fragment {
     private String mParam2;
 
     Button btnAñadir;
+    TextView txtBuscar;
     ListView listaUsuario;
     ArrayList<Usuario> lista = new ArrayList<>();
+    UsuarioAdapter adapter;
     BDOperations bd;
+
+    private static final int CHILD_REQUEST = 0;
 
     private OnFragmentInteractionListener mListener;
 
@@ -87,6 +99,7 @@ public class ListaUsuariosFragment extends Fragment {
 
         btnAñadir = (Button) v.findViewById(R.id.btnInsertarUsuario);
         listaUsuario = (ListView) v.findViewById(R.id.listUsuarios);
+        txtBuscar = (TextView) v.findViewById(R.id.txtBuscar);
 
         bd = new BDOperations(v.getContext());
 
@@ -105,16 +118,34 @@ public class ListaUsuariosFragment extends Fragment {
         listaUsuario.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-                //mensaje_Si_No(usuario.get(position).getId());
-                return true;
+                if(VariablesGlobales.Usuario.getTipo() == 0) {
+                    mensaje_Si_No(lista.get(position).getId());
+                }return true;
+            }
+        });
+
+        txtBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
         btnAñadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent inte = new Intent(v.getContext(), InsertarLicencia.class);
-                //startActivity(inte);
+                Intent inte = new Intent(getActivity(), RegistrarUsuario.class);
+                startActivityForResult(inte,CHILD_REQUEST);
             }
         });
 
@@ -123,21 +154,21 @@ public class ListaUsuariosFragment extends Fragment {
 
     public void CargarLista(){
         lista = bd.cargarUsuarios();
-        UsuarioAdapter adapter = new UsuarioAdapter(getActivity(), lista);
+        adapter = new UsuarioAdapter(getActivity(), lista);
         listaUsuario.setAdapter(adapter);
     }
 
     public void mensaje_Si_No(final String idUser){
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
         dialogo1.setTitle("Atención");
-        dialogo1.setMessage("¿Desea Eliminar la Licencia ?");
+        dialogo1.setMessage("¿Desea Eliminar este usuario ?");
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 if(bd.deleteUsuario(idUser))
-                    Toast.makeText(getActivity(),"Se ha eliminado la licencia",Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(),"Se ha eliminado el Usuario",Toast.LENGTH_SHORT);
                 else
-                    Toast.makeText(getActivity(),"No se ha podido eliminar la licencia",Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(),"No se ha podido eliminar el Usuario",Toast.LENGTH_SHORT);
 
                 CargarLista();
             }
@@ -150,6 +181,22 @@ public class ListaUsuariosFragment extends Fragment {
         dialogo1.show();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHILD_REQUEST){
+            switch (resultCode) {
+                case RESULT_OK: {
+                    CargarLista();
+                    break;
+                }
+
+                case RESULT_CANCELED: {
+                    // Cancelación o cualquier situación de error
+                    break;
+                }
+            }
+        }
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

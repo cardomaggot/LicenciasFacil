@@ -67,6 +67,7 @@ public class InsertarLicencia extends AppCompatActivity {
 
         if(bd.saveLicencia(lc)){
             PopUpMensaje("Se ha insertado la Licencia");
+            setResult(RESULT_OK);
             finish();
         }else{
             PopUpMensaje("No se ha podido insertar la Licencia");
