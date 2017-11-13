@@ -12,8 +12,7 @@ public class Comentario {
     String comentario="";
     String usuario="";
     String licencia="";
-    Date fecha=new Date();
-
+    String fecha="";
 
     public String getId() {
         return id;
@@ -47,11 +46,11 @@ public class Comentario {
         this.licencia = licencia;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 }

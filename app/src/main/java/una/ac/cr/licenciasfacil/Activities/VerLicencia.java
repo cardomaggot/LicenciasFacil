@@ -11,9 +11,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
+import una.ac.cr.licenciasfacil.Clases.Comentario;
+import una.ac.cr.licenciasfacil.Clases.ComentarioAdapter;
 import una.ac.cr.licenciasfacil.Clases.Licencia;
 import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
 import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
@@ -34,9 +39,8 @@ public class VerLicencia extends AppCompatActivity {
     Licencia licencia;
 
 
-
     ArrayList<Comentario> lista = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ComentarioAdapter adapter;
 
     ListView listaComentarios;
     TextView txtComentario;
@@ -93,7 +97,19 @@ public class VerLicencia extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    String formattedDate = df.format(c.getTime());
 
+                    Comentario cm = new Comentario();
+                    cm.setComentario(txtComentario.getText().toString());
+                    cm.setUsuario(VariablesGlobales.Usuario.getId());
+                    cm.setLicencia(licencia.getId());
+                    cm.setFecha(formattedDate);
+
+                    bd.saveComentario(cm);
+                    CargarLista();
+                    txtComentario.setText("");
 
                 }
                 return false;
@@ -122,9 +138,9 @@ public class VerLicencia extends AppCompatActivity {
 
     public void CargarLista(){
 
-        //lista = bd.cargarComentario();
+        lista = bd.cargarComentarios(licencia.getId());
 
-        adapter = new ComentarioAdapter(VerLicencia.this, lista);
+        adapter = new ComentarioAdapter(this,lista);
         listaComentarios.setAdapter(adapter);
     }
 

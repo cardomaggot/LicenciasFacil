@@ -5,9 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import una.ac.cr.licenciasfacil.Clases.Comentario;
 import una.ac.cr.licenciasfacil.Clases.Licencia;
 import una.ac.cr.licenciasfacil.Clases.Usuario;
 
@@ -221,6 +224,7 @@ public class BDOperations {
             if(cursor.moveToFirst()) //Si se trajo algo
             {
                 u = cursor.getString(cursor.getColumnIndex(BDContract.Usuario.EMAIL));
+
             }
 
         }catch (Exception e){
@@ -329,6 +333,75 @@ public class BDOperations {
         try {
             db = BDHelper.getWritableDatabase();
             hecho = db.delete(BDContract.LicenciaAprobacion.TABLE_NAME, BDContract.LicenciaAprobacion.ID + "=" +"'"+ id+"'", null)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return hecho;
+    }
+
+    //TODO---------------------------------------------------------- METODOS DE LA LICENCIA --------------------------------------------------------
+
+    public boolean saveComentario(Comentario u) {
+
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.Comentario.ID, UUID.randomUUID().toString());
+            values.put(BDContract.Comentario.COMENTARIO, u.getComentario());
+            values.put(BDContract.Comentario.LICENCIA, u.getLicencia());
+            values.put(BDContract.Comentario.USUARIO, u.getUsuario());
+            values.put(BDContract.Comentario.FECHA, u.getFecha());
+
+            hecho = db.insert(BDContract.Comentario.TABLE_NAME, null, values)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+
+
+    public ArrayList<Comentario> cargarComentarios(String id){
+
+        ArrayList<Comentario> lista = new ArrayList<Comentario>();
+        db=BDHelper.getReadableDatabase();
+
+        try {
+            Cursor cursor = db.rawQuery("SELECT c.id, c.comentario, u.email as usuario, c.licencia, c.fecha FROM " + BDContract.Comentario.TABLE_NAME+
+                    " c INNER JOIN "+BDContract.Usuario.TABLE_NAME+" u on c.usuario = u.id WHERE c."+BDContract.Comentario.LICENCIA+
+                    " = "+"'"+id+"'",null);
+
+            if (cursor.moveToFirst()) {//pone el cursor al inicio
+                while (!cursor.isAfterLast()) {//Hasta el Final
+
+                    Comentario u = new Comentario();
+                    u.setId(cursor.getString(cursor.getColumnIndex(BDContract.Comentario.ID)));
+                    u.setComentario(cursor.getString(cursor.getColumnIndex(BDContract.Comentario.COMENTARIO)));
+                    u.setUsuario(cursor.getString(cursor.getColumnIndex(BDContract.Comentario.USUARIO)));
+                    u.setLicencia(cursor.getString(cursor.getColumnIndex(BDContract.Comentario.LICENCIA)));
+                    u.setFecha(cursor.getString(cursor.getColumnIndex(BDContract.Comentario.FECHA)));
+
+                    //Añade la instancia al array de registros
+                    lista.add(u);
+                    cursor.moveToNext();
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public boolean deleteComentario(String id){
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            hecho = db.delete(BDContract.Comentario.TABLE_NAME, BDContract.Comentario.ID + "=" +"'"+ id+"'", null)>0;
         }catch (Exception e){
             e.printStackTrace();
         }

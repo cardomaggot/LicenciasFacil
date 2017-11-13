@@ -16,8 +16,8 @@ public class BDContract {
         public static final String TABLE_NAME = "comentarios";
         public static final String ID = "id";
         public static final String COMENTARIO = "comentario";
-        public static final String USUARIO = "usuario";
-        public static final String LICENCIA= "licencia";
+        public static final String USUARIO = "usuario";//FK
+        public static final String LICENCIA= "licencia";//FK
         public static final String FECHA= "fecha";
     }
 
@@ -48,7 +48,8 @@ public class BDContract {
     public static class Likes implements BaseColumns { //Nombre de la tabla y de los datos
         public static final String TABLE_NAME = "likes";
         public static final String ID = "id";
-        public static final String LICENCIA = "licencia";
+        public static final String USUARIO = "usuario";//FK
+        public static final String LICENCIA = "licencia";//FK
     }
 
     public static class Usuario implements BaseColumns { //Nombre de la tabla y de los datos
