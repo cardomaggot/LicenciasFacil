@@ -1,10 +1,12 @@
 package una.ac.cr.licenciasfacil.Clases;
 
+import java.io.Serializable;
+
 /**
  * Created by cardo on 14/11/17.
  */
 
-public class Otros {
+public class Otros implements Serializable{
     String id="";//uuid;
     String titulo="";
     String descripcion="";

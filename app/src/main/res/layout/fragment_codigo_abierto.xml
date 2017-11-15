@@ -25,7 +25,16 @@
                 android:paddingTop="30dp"/>
 
             <TextView
-                android:id="@+id/lblSoftwareLibre"
+                android:id="@+id/lblOP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Open Source"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/lblOS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

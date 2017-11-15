@@ -69,7 +69,7 @@ public class CodigoAbiertoFragment extends Fragment {
         // Inflate the layout for this fragment
         View v=  inflater.inflate(R.layout.fragment_codigo_abierto, container, false);
 
-        txt = (TextView) v.findViewById(R.id.lblSoftwareLibre);
+        txt = (TextView) v.findViewById(R.id.lblOS);
         txt.setText("Es la comunidad de software libre, en la cual se rigen a partir de 10 principios, de acuerdo a otras comunidades: " +
                 "\n" +
                 "- Libre redistribución: La licencia del software no debe impedir que este sea regalado o vendido libremente como parte de una distribución mayor que contenga programas de diferentes fuentes. Tampoco debe exigir un pago por hacerlo.\n" +

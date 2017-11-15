@@ -26,14 +26,22 @@
                 android:paddingTop="30dp"/>
 
             <TextView
+                android:id="@+id/lblLibre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Software Libre"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+            <TextView
                 android:id="@+id/lblSoftwareLibre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Software Libre"/>
+                android:layout_marginLeft="15dp"/>
         </LinearLayout>
     </RelativeLayout>
     </ScrollView>

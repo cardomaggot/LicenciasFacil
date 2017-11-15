@@ -21,8 +21,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import una.ac.cr.licenciasfacil.Activities.ActualizarOtro;
 import una.ac.cr.licenciasfacil.Activities.InsertarLicencia;
 import una.ac.cr.licenciasfacil.Activities.InsertarOtro;
+import una.ac.cr.licenciasfacil.Activities.VerOtro;
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
 import una.ac.cr.licenciasfacil.Clases.LicenciaAdapter;
 import una.ac.cr.licenciasfacil.Clases.Otros;
@@ -118,17 +120,15 @@ public class OtrosFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 
                 if(VariablesGlobales.Usuario.getTipo()==0){
-
+                    Intent intent = new Intent(view.getContext(), ActualizarOtro.class);
+                    intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                    startActivityForResult(intent,CHILD_REQUEST);
                 }else {
-                    if (VariablesGlobales.isFaq) {
-                        //Intent intent = new Intent(view.getContext(), .class);
-                    } else {
-                        //Intent intent = new Intent(view.getContext(), .class);
-                    }
-
-                    //    intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
-                    //    startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), VerOtro.class);
+                    intent.putExtra("lic", lista.get(position));//se manda el id para en la otra vista poder cargar los datos
+                    startActivity(intent);
                 }
+
             }
         });
 

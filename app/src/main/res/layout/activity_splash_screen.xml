@@ -7,6 +7,35 @@
     tools:context="una.ac.cr.licenciasfacil.Activities.SplashScreen">
 
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/write"
+        android:layout_alignTop="@+id/apache"
+        android:layout_alignRight="@+id/progressBar"
+        android:layout_alignEnd="@+id/progressBar"
+        android:layout_marginRight="27dp"
+        android:layout_marginEnd="27dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/write"
+        android:layout_above="@+id/progressBar"
+        android:layout_toRightOf="@+id/imageView5"
+        android:layout_toEndOf="@+id/imageView5" />
+
+    <ImageView
+        android:id="@+id/apache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/progressBar"
+        android:layout_alignStart="@+id/progressBar"
+        android:layout_alignTop="@+id/imageView4"
+        android:src="@drawable/write" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -16,12 +45,7 @@
         android:layout_alignTop="@+id/editText"
         android:layout_centerHorizontal="true"
         />
-    <ImageView
-        android:id="@+id/apache"
-        android:layout_marginTop="80dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/wingx" />
+
     <TextView
         android:id="@+id/editText"
         android:layout_width="wrap_content"

@@ -68,7 +68,7 @@ public class CreativeCommonsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_creative_commons, container, false);
-        txt = (TextView) v.findViewById(R.id.lblSoftwareLibre);
+        txt = (TextView) v.findViewById(R.id.lblCC);
         txt.setText("Creative Commons (CC) ―en español, \"Comunes Creativos\"― es una organización sin fines de lucro dedicada a promover el acceso y el intercambio de cultura. Desarrolla un conjunto de instrumentos jurídicos de carácter gratuito que facilitan usar y compartir tanto la creatividad como el conocimiento. Su sede central se encuentra en Mountain View, en el estado de California, Estados Unidos.\n" +
                 "\n" +
                 "Los instrumentos jurídicos desarrollados por la organización consisten en un conjunto de “modelos de contratos de licenciamiento” o licencias de derechos de autor (licencias Creative Commons o licencias CC) que ofrecen al autor de una obra una manera simple y estandarizada de otorgar permiso al público para compartir y usar su trabajo creativo bajo los términos y condiciones de su elección. En este sentido, las licencias Creative Commons permiten al autor cambiar fácilmente los términos y condiciones de derechos de autor de su obra de “todos los derechos reservados” a “algunos derechos reservados”.\n" +

@@ -67,6 +67,7 @@ public class LicenciaAdapter extends ArrayAdapter<Licencia> implements Filterabl
 
 
         Bitmap bmp = BitmapFactory.decodeByteArray(licencia.getImagen(),0,licencia.getImagen().length);
+
         imagen.setImageBitmap(bmp);
         imagen.setBackgroundResource(0);
 
