@@ -1,5 +1,7 @@
 package una.ac.cr.licenciasfacil.Activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -69,7 +71,10 @@ public class VerLicencia extends AppCompatActivity {
         descripcion.setText(licencia.getDescripcion());
         tipo.setText(licencia.getTipo());
         software.setText(licencia.getSoftware());
-        //imagen.setBackground(licencia.getImagen());
+
+        Bitmap bmp = BitmapFactory.decodeByteArray(licencia.getImagen(),0,licencia.getImagen().length);
+        imagen.setImageBitmap(bmp);
+        imagen.setBackgroundResource(0);
 
         if(!VariablesGlobales.isListaAprobacion){
             usuario.setVisibility(View.INVISIBLE);

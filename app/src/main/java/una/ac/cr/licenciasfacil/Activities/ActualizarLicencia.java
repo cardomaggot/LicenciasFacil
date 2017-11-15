@@ -1,6 +1,9 @@
 package una.ac.cr.licenciasfacil.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
@@ -50,6 +54,10 @@ public class ActualizarLicencia extends AppCompatActivity {
         txtDescripcion.setText(li.getDescripcion());
         txtTipo.setText(li.getTipo());
         txtSoftware.setText(li.getSoftware());
+        Bitmap bmp = BitmapFactory.decodeByteArray(li.getImagen(),0,li.getImagen().length);
+        imagen.setImageBitmap(bmp);
+        imagen.setBackgroundResource(0);
+
     }
 
 
@@ -82,6 +90,13 @@ public class ActualizarLicencia extends AppCompatActivity {
         lc.setDescripcion(txtDescripcion.getText().toString());
         lc.setTipo(txtTipo.getText().toString());
         lc.setSoftware(txtSoftware.getText().toString());
+        Bitmap bitmap = ((BitmapDrawable) imagen.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] imageInByte = baos.toByteArray();
+
+        lc.setImagen(imageInByte);
+
 
         if(bd.updateLicencia(lc)){
             PopUpMensaje("Se ha Actualizado la Licencia");
@@ -91,8 +106,7 @@ public class ActualizarLicencia extends AppCompatActivity {
             PopUpMensaje("No se ha podido Actualizar la Licencia");
         }
     }
-
-    private void cargarImagen(){
+    public void ActualizarImagen(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
         startActivityForResult(intent.createChooser(intent,"Seleccione la aplicacion"),10);
@@ -112,7 +126,5 @@ public class ActualizarLicencia extends AppCompatActivity {
         Toast.makeText(this,msj,Toast.LENGTH_SHORT).show();
     }
 
-    public void ActualizarImagen(View view) {
-        cargarImagen();
-    }
+
 }

@@ -19,7 +19,7 @@ import java.io.OutputStream;
 
 public class BDHelper extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION=6;
+    public static final int DATABASE_VERSION=7;
     public static final String DATABASE_NAME="Licencias.db"; //Le pone el nombre de la base de datos, es un archivo físico
     //Si ve que no existe va al onCreate y la crea
     private final Context myContext;
@@ -208,7 +208,7 @@ public class BDHelper extends SQLiteOpenHelper{
             BDContract.Licencia.VERSION + " TEXT, "+
             BDContract.Licencia.TIPO + " TEXT,"+
             BDContract.Licencia.DESCRIPCION + " TEXT," +
-            //BDContract.Licencia.IMAGEN + " TEXT, "+
+            BDContract.Licencia.IMAGEN + " BLOB, "+
             BDContract.Licencia.SOFTWARE + " TEXT "+
             ")";
 

@@ -1,6 +1,8 @@
 package una.ac.cr.licenciasfacil.Clases;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.SyncStateContract;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +65,11 @@ public class LicenciaAdapter extends ArrayAdapter<Licencia> implements Filterabl
         TextView txtLicencia = (TextView) convertView.findViewById(R.id.txtNombreLicenciaAD);
         TextView txtTipo = (TextView) convertView.findViewById(R.id.txtTipoLicenciaAD);
 
-        //imagen.setBackground(R.drawable."licencia.imagen");algo asi es
+
+        Bitmap bmp = BitmapFactory.decodeByteArray(licencia.getImagen(),0,licencia.getImagen().length);
+        imagen.setImageBitmap(bmp);
+        imagen.setBackgroundResource(0);
+
         txtLicencia.setText(licencia.getNombre() + " " + licencia.getVersion());
         txtTipo.setText(licencia.getTipo());
 

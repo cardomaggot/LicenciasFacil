@@ -1,6 +1,8 @@
 package una.ac.cr.licenciasfacil.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 import una.ac.cr.licenciasfacil.BaseDatos.BDOperations;
 import una.ac.cr.licenciasfacil.Clases.Licencia;
@@ -31,7 +35,7 @@ public class InsertarLicencia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar_licencia);
-       // Spinner staticSpinner = (Spinner) findViewById(R.id.selTipoLicencia);
+        // Spinner staticSpinner = (Spinner) findViewById(R.id.selTipoLicencia);
         imagen = (ImageView) findViewById(R.id.imageViews);
 
         txtNombre = (TextView) findViewById(R.id.txtNombreLicencia);
@@ -52,24 +56,24 @@ public class InsertarLicencia extends AppCompatActivity {
     }
 
 
-    public void Insertar(View v){
-        if(txtNombre.getText().toString().equals("")){
+    public void Insertar(View v) {
+        if (txtNombre.getText().toString().equals("")) {
             PopUpMensaje("Nombre vacio");
             return;
         }
-        if(txtVersion.getText().toString().equals("")){
+        if (txtVersion.getText().toString().equals("")) {
             PopUpMensaje("Version vacio");
             return;
         }
-        if(txtTipo.getText().toString().equals("")){
+        if (txtTipo.getText().toString().equals("")) {
             PopUpMensaje("Tipo vacio");
             return;
         }
-        if(txtDescripcion.getText().toString().equals("")){
+        if (txtDescripcion.getText().toString().equals("")) {
             PopUpMensaje("Descripcion vacio");
             return;
         }
-        if(txtSoftware.getText().toString().equals("")){
+        if (txtSoftware.getText().toString().equals("")) {
             PopUpMensaje("Software vacio");
             return;
         }
@@ -81,37 +85,41 @@ public class InsertarLicencia extends AppCompatActivity {
         lc.setTipo(txtTipo.getText().toString());
         lc.setSoftware(txtSoftware.getText().toString());
 
-        if(bd.saveLicencia(lc)){
+
+        Bitmap bitmap = ((BitmapDrawable) imagen.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] imageInByte = baos.toByteArray();
+
+        lc.setImagen(imageInByte);
+
+        if (bd.saveLicencia(lc)) {
             PopUpMensaje("Se ha insertado la Licencia");
             setResult(RESULT_OK);
             finish();
-        }else{
+        } else {
             PopUpMensaje("No se ha podido insertar la Licencia");
         }
     }
 
     public void insertarImagen(View view) {
-        cargarImagen();
-    }
-
-    private void cargarImagen(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent,"Seleccione la aplicacion"),10);
+        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-            Uri path=data.getData();
+        if (resultCode == RESULT_OK) {
+            Uri path = data.getData();
             imagen.setImageURI(path);
         }
     }
 
-    public void PopUpMensaje(String msj){
-        Toast.makeText(this,msj,Toast.LENGTH_SHORT).show();
+    public void PopUpMensaje(String msj) {
+        Toast.makeText(this, msj, Toast.LENGTH_SHORT).show();
     }
-
 
 }

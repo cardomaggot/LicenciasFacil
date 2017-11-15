@@ -48,7 +48,7 @@ public class BDOperations {
             values.put(BDContract.Licencia.TIPO, lc.getTipo());
             values.put(BDContract.Licencia.DESCRIPCION, lc.getDescripcion());
             values.put(BDContract.Licencia.SOFTWARE, lc.getSoftware());
-            //values.put(BDContract.Licencia.IMAGEN, lc.getImagen());
+            values.put(BDContract.Licencia.IMAGEN, lc.getImagen());
 
 
             hecho = db.insert(BDContract.Licencia.TABLE_NAME, null, values)>0;
@@ -71,7 +71,7 @@ public class BDOperations {
             values.put(BDContract.Licencia.DESCRIPCION, lc.getDescripcion());
             values.put(BDContract.Licencia.TIPO, lc.getTipo());
             values.put(BDContract.Licencia.SOFTWARE, lc.getSoftware());
-            //values.put(BDContract.Licencia.IMAGEN, lc.getImagen());
+            values.put(BDContract.Licencia.IMAGEN, lc.getImagen());
 
              hecho = db.update(BDContract.Licencia.TABLE_NAME,values,BDContract.Licencia.ID+ " = ?",new String[]{lc.getId()})>0;
         }catch (Exception e){
@@ -98,7 +98,7 @@ public class BDOperations {
                     l.setDescripcion(cursor.getString(cursor.getColumnIndex(BDContract.Licencia.DESCRIPCION)));
                     l.setTipo(cursor.getString(cursor.getColumnIndex(BDContract.Licencia.TIPO)));
                     l.setSoftware(cursor.getString(cursor.getColumnIndex(BDContract.Licencia.SOFTWARE)));
-                    //l.setImagen(cursor.getString(cursor.getColumnIndex(BDContract.LicenciaAprobacion.IMAGEN)));
+                    l.setImagen(cursor.getBlob(cursor.getColumnIndex(BDContract.LicenciaAprobacion.IMAGEN)));
 
 
                     //Añade la instancia al array de registros
