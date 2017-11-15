@@ -23,4 +23,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string-array name="brew_array">
+        <item>Software Libre</item>
+        <item>Software Privativo</item>
+        <item>Código Abierto</item>
+        <item>Creative Commons</item>
+    </string-array>
 </resources>

@@ -22,6 +22,14 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/gnulinus"
                 android:paddingTop="30dp"/>
+            <TextView
+                android:id="@+id/lblSoftwareFLOSS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Software Libre"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/lblSoftwareLibre"

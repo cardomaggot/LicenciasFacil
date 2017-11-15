@@ -23,6 +23,7 @@
         app:srcCompat="@drawable/man" />
 
         <TextView
+            android:layout_marginTop="15dp"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,6 +49,7 @@
         android:textColor="#FFFFFF"
         android:inputType="textPersonName"
         android:textSize="20dp"
+        android:gravity="center"
         android:layout_marginTop="76dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true" />
@@ -56,6 +58,7 @@
         android:id="@+id/txtPass"
         android:layout_width="200dp"
         android:layout_height="40dp"
+        android:gravity="center"
         android:layout_alignLeft="@+id/txtUsuario"
         android:layout_alignStart="@+id/txtUsuario"
         android:layout_below="@+id/txtUsuario"
@@ -108,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Entrar como invitado"
+        android:text="Ingresar como Invitado"
         android:layout_below="@+id/txtRegistrarse"
         android:layout_centerHorizontal="true" />
         </RelativeLayout>

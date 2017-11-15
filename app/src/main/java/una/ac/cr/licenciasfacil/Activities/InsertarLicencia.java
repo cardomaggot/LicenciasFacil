@@ -1,9 +1,15 @@
 package una.ac.cr.licenciasfacil.Activities;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,7 +18,7 @@ import una.ac.cr.licenciasfacil.Clases.Licencia;
 import una.ac.cr.licenciasfacil.R;
 
 public class InsertarLicencia extends AppCompatActivity {
-
+    ImageView imagen;
     TextView txtNombre;
     TextView txtVersion;
     TextView txtTipo;
@@ -25,6 +31,8 @@ public class InsertarLicencia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar_licencia);
+       // Spinner staticSpinner = (Spinner) findViewById(R.id.selTipoLicencia);
+        imagen = (ImageView) findViewById(R.id.imageViews);
 
         txtNombre = (TextView) findViewById(R.id.txtNombreLicencia);
         txtVersion = (TextView) findViewById(R.id.txtVersionLicencia);
@@ -32,6 +40,14 @@ public class InsertarLicencia extends AppCompatActivity {
         txtDescripcion = (TextView) findViewById(R.id.txtDescripcionLicencia);
         txtSoftware = (TextView) findViewById(R.id.txtSoftwareLicencia);
         btnInsertar = (Button) findViewById(R.id.btnInsertarLicencia);
+
+       /* ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(this, R.array.brew_array, android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        staticSpinner.setAdapter(staticAdapter); */
 
     }
 
@@ -74,8 +90,28 @@ public class InsertarLicencia extends AppCompatActivity {
         }
     }
 
+    public void insertarImagen(View view) {
+        cargarImagen();
+    }
+
+    private void cargarImagen(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent,"Seleccione la aplicacion"),10);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Uri path=data.getData();
+            imagen.setImageURI(path);
+        }
+    }
 
     public void PopUpMensaje(String msj){
         Toast.makeText(this,msj,Toast.LENGTH_SHORT).show();
     }
+
+
 }

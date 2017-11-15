@@ -14,8 +14,7 @@
         android:layout_marginTop="13dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/colorAccent"
-        android:background="@drawable/ic_usuario"/>
+        android:background="@drawable/man"/>
 
     <TextView
         android:id="@+id/txtUsuarioAD"

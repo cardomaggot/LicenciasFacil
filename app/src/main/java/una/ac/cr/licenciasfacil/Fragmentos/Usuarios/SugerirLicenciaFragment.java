@@ -1,13 +1,16 @@
 package una.ac.cr.licenciasfacil.Fragmentos.Usuarios;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +39,15 @@ public class SugerirLicenciaFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    ImageView imagen;
+
     TextView txtNombre;
     TextView txtVersion;
     TextView txtTipo;
     TextView txtDescripcion;
     TextView txtSoftware;
     Button btnSugerir;
+    Button btnImagen;
     BDOperations bd;
 
     private OnFragmentInteractionListener mListener;
@@ -81,13 +87,14 @@ public class SugerirLicenciaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_sugerir_licencia, container, false);
-
+        imagen = (ImageView) v.findViewById(R.id.imageViews);
         txtNombre = (TextView) v.findViewById(R.id.txtNombreLicencia);
         txtVersion = (TextView) v.findViewById(R.id.txtVersionLicencia);
         txtTipo = (TextView) v.findViewById(R.id.txtTipoLicencia);
         txtDescripcion = (TextView) v.findViewById(R.id.txtDescripcionLicencia);
         txtSoftware = (TextView) v.findViewById(R.id.txtSoftwareLicencia);
         btnSugerir = (Button) v.findViewById(R.id.btnSugerir);
+        btnImagen = (Button) v.findViewById(R.id.btnCargarImgen);
 
         btnSugerir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +103,32 @@ public class SugerirLicenciaFragment extends Fragment {
             }
         });
 
+        btnImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cargarImagen();
+            }
+        });
+
         bd = new BDOperations(v.getContext());
 
         return v;
     }
 
+    private void cargarImagen(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent,"Seleccione la aplicacion"),10);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Uri path=data.getData();
+            imagen.setImageURI(path);
+        }
+    }
 
     public void Sugerir(){
         if(txtNombre.getText().toString().equals("")){

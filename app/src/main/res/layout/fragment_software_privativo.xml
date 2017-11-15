@@ -18,8 +18,16 @@
                 android:id="@+id/imgWindows"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/windows"
+                android:src="@drawable/copyrightx"
                 android:paddingTop="30dp"/>
+            <TextView
+                android:id="@+id/lblPrivativo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Copyright"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/lblSoftwareLibre"
