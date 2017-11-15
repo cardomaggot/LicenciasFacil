@@ -14,12 +14,12 @@ import una.ac.cr.licenciasfacil.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SoftwarePrivativoFragment.OnFragmentInteractionListener} interface
+ * {@link CopyleftFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SoftwarePrivativoFragment#newInstance} factory method to
+ * Use the {@link CopyleftFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SoftwarePrivativoFragment extends Fragment {
+public class CopyleftFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,9 +30,10 @@ public class SoftwarePrivativoFragment extends Fragment {
     private String mParam2;
     TextView txt;
 
+
     private OnFragmentInteractionListener mListener;
 
-    public SoftwarePrivativoFragment() {
+    public CopyleftFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +43,11 @@ public class SoftwarePrivativoFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SoftwarePrivativoFragment.
+     * @return A new instance of fragment CopyleftFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SoftwarePrivativoFragment newInstance(String param1, String param2) {
-        SoftwarePrivativoFragment fragment = new SoftwarePrivativoFragment();
+    public static CopyleftFragment newInstance(String param1, String param2) {
+        CopyleftFragment fragment = new CopyleftFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,12 +67,15 @@ public class SoftwarePrivativoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_software_privativo, container, false);
-        txt = (TextView) v.findViewById(R.id.lblSoftwareLibre);
-        txt.setText("Se denomina con el falso amigo software propietario, o, dicho correctamente, privativo, al software del cual no existe una forma libre de acceso a su código fuente, el cual solo se encuentra a disposición de su desarrollador y no se permite su libre modificación, adaptación o incluso lectura por parte de terceros. El término ha sido creado para designar al antónimo del concepto de software libre, por lo cual en diversos sectores se le han asignado implicaciones políticas relativas al mismo. Para la Fundación para el Software Libre (FSF), este concepto se aplica a cualquier programa informático que no es libre o que solo lo es parcialmente (semilibre), sea porque su uso, redistribución o modificación está prohibida, o sea porque requiere permiso expreso del titular del software.\n" +
+        View v= inflater.inflate(R.layout.fragment_copyleft, container, false);
+        txt = (TextView) v.findViewById(R.id.lblCopyleftDesc);
+        txt.setText(" El copyleft es un método general para liberar un programa u otro tipo de trabajo (en el sentido de libertad, no de gratuidad), que requiere que todas las versiones modificadas y extendidas sean también libres.\n" +
                 "\n" +
-                "La persona física o jurídica (compañía, corporación, fundación, etc.), al poseer los derechos de autor sobre un software, tiene la posibilidad de controlar y restringir los derechos del usuario sobre su programa, lo que en el software no libre implica por lo general que el usuario solo tendrá derecho a ejecutar el software bajo ciertas condiciones, comúnmente fijadas por el proveedor, que signifique la restricción de una o varias de las cuatro libertades.");
+                "La manera más simple de hacer que un programa sea software libre consiste en ponerlo en el dominio público, sin copyright. Esto permite compartir el programa y sus mejoras a quienes así lo deseen. Sin embargo, también posibilita que otra gente sin interés cooperativo convierta el programa en software privativo. Pueden hacer cambios, muchos o pocos, y distribuir el resultado como un producto privativo. Quienes reciban el programa modificado en esas condiciones no podrán disfrutar de la libertad que el autor original les dio. El intermediario se la ha arrebatado.\n" +
+                "\n" +
+                "El objetivo del proyecto GNU es dar a todos los usuarios la libertad de redistribuir y cambiar el software GNU. Si los intermediarios pudiesen eliminar esta libertad, nuestro código podría «tener muchos usuarios», pero no les daría libertad. Por eso, en vez de poner el software GNU en el dominio público, lo protegemos con copyleft. Copyleft significa que cualquiera que redistribuya el software, con o sin cambios, debe transmitir la libertad de poder seguir haciendo más copias y cambios. El copyleft garantiza que cualquier usuario tenga libertad.");
         return v;
     }
 

@@ -9,111 +9,115 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
-        app:srcCompat="@drawable/man" />
-
-        <TextView
-            android:layout_marginTop="15dp"
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:editable="false"
-            android:enabled="false"
-            android:text="Licencias Fácil"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="30sp"
-            android:textStyle="bold|italic"
-            android:layout_below="@+id/imageView2"
-            android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:id="@+id/txtUsuario"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:background="@null"
-        android:drawableLeft="@drawable/ic_usuario"
-        android:ems="10"
-        android:hint="Usuario"
-        android:textColor="#FFFFFF"
-        android:inputType="textPersonName"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_marginTop="76dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:id="@+id/txtPass"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_alignLeft="@+id/txtUsuario"
-        android:layout_alignStart="@+id/txtUsuario"
-        android:layout_below="@+id/txtUsuario"
-        android:layout_marginTop="38dp"
-        android:background="@null"
-        android:drawableLeft="@drawable/ic_pass"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
-
-    <android.support.v7.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="35dp"
-        app:cardBackgroundColor="#283c83"
-        app:cardCornerRadius="20dp"
-        android:id="@+id/cardView"
-        android:layout_below="@+id/txtPass"
-        android:onClick="Iniciar"
-        android:layout_centerHorizontal="true">
-
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView"
+            <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Iniciar Sesión"
+                android:layout_marginTop="82dp"
+                app:srcCompat="@drawable/man"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:editable="false"
+                android:enabled="false"
+                android:text="Licencias Fácil"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="30sp"
+                android:textStyle="bold|italic"
+                android:layout_below="@+id/imageView2"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/txtUsuario"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_usuario"
+                android:ems="10"
+                android:hint="Usuario"
+                android:visibility="invisible"
                 android:textColor="#FFFFFF"
-                android:textSize="18dp" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+                android:inputType="textPersonName"
+                android:textSize="20dp"
+                android:layout_marginTop="76dp"
+                android:layout_below="@+id/imageView2"
+                android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/txtRegistrarse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cardView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Registrarse" />
+            <EditText
+                android:id="@+id/txtPass"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_alignLeft="@+id/txtUsuario"
+                android:layout_alignStart="@+id/txtUsuario"
+                android:layout_below="@+id/txtUsuario"
+                android:layout_marginTop="38dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_pass"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:visibility="invisible"
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/txtInvitado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Ingresar como Invitado"
-        android:layout_below="@+id/txtRegistrarse"
-        android:layout_centerHorizontal="true" />
+            <android.support.v7.widget.CardView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="35dp"
+                app:cardBackgroundColor="#283c83"
+                app:cardCornerRadius="20dp"
+                android:id="@+id/cardView"
+                android:layout_below="@+id/txtPass"
+                android:onClick="Iniciar"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Ingresar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtRegistrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Registrarse"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/txtInvitado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Entrar como Admin"
+                android:layout_below="@+id/txtRegistrarse"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible"/>
         </RelativeLayout>
     </ScrollView>
 

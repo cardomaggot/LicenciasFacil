@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import una.ac.cr.licenciasfacil.Clases.Comentario;
 import una.ac.cr.licenciasfacil.Clases.Licencia;
+import una.ac.cr.licenciasfacil.Clases.Otros;
 import una.ac.cr.licenciasfacil.Clases.Usuario;
 
 /**
@@ -402,6 +403,87 @@ public class BDOperations {
         try {
             db = BDHelper.getWritableDatabase();
             hecho = db.delete(BDContract.Comentario.TABLE_NAME, BDContract.Comentario.ID + "=" +"'"+ id+"'", null)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return hecho;
+    }
+
+    //TODO---------------------------------------------------------- METODOS DE OTROS --------------------------------------------------------
+
+    public boolean saveOtros(Otros u) {
+
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.Otros.ID, UUID.randomUUID().toString());
+            values.put(BDContract.Otros.TITULO, u.getTitulo());
+            values.put(BDContract.Otros.DESCRIPCION, u.getDescripcion());
+            values.put(BDContract.Otros.TIPO, u.getTipo());
+
+            hecho = db.insert(BDContract.Otros.TABLE_NAME, null, values)>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+    public boolean updateOtros(Otros u) { //recibe una canción para guardarla o actualizarla
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            //El primer parámetro es como poner la tabla, el segundo el dato
+            values.put(BDContract.Otros.TITULO, u.getTitulo());
+            values.put(BDContract.Otros.DESCRIPCION, u.getDescripcion());
+            values.put(BDContract.Otros.TIPO, u.getTipo());
+
+            hecho = db.update(BDContract.Otros.TABLE_NAME,values,BDContract.Otros.ID+ " = ?",new String[]{u.getId()})>0;
+        }catch (Exception e){
+            e.printStackTrace();
+            hecho=false;
+        }
+        return hecho;
+    }
+
+    public ArrayList<Otros> cargarOtros(int id){
+
+        ArrayList<Otros> lista = new ArrayList<Otros>();
+        db=BDHelper.getReadableDatabase();
+
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + BDContract.Otros.TABLE_NAME+" WHERE "+BDContract.Otros.TIPO+" = '"+id+"'",null);
+            if (cursor.moveToFirst()) {//pone el cursor al inicio
+                while (!cursor.isAfterLast()) {//Hasta el Final
+
+                    Otros u = new Otros();
+                    u.setId(cursor.getString(cursor.getColumnIndex(BDContract.Otros.ID)));
+                    u.setTitulo(cursor.getString(cursor.getColumnIndex(BDContract.Otros.TITULO)));
+                    u.setDescripcion(cursor.getString(cursor.getColumnIndex(BDContract.Otros.DESCRIPCION)));
+                    u.setTipo(cursor.getInt(cursor.getColumnIndex(BDContract.Otros.TIPO)));
+
+                    //Añade la instancia al array de registros
+                    lista.add(u);
+                    cursor.moveToNext();
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public boolean deleteOtros(String id){
+        boolean hecho=false;
+        try {
+            db = BDHelper.getWritableDatabase();
+            hecho = db.delete(BDContract.Otros.TABLE_NAME, BDContract.Otros.ID + "=" +"'"+ id+"'", null)>0;
         }catch (Exception e){
             e.printStackTrace();
         }

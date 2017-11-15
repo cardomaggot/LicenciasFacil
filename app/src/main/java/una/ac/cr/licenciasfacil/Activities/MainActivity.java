@@ -18,9 +18,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import layout.OtrosFragment;
 import una.ac.cr.licenciasfacil.Clases.VariablesGlobales;
 import una.ac.cr.licenciasfacil.Fragmentos.Licencias.ListaLicenciaFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CodigoAbiertoFragment;
+import una.ac.cr.licenciasfacil.Fragmentos.Software.CopyleftFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.CreativeCommonsFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwareLibreFragment;
 import una.ac.cr.licenciasfacil.Fragmentos.Software.SoftwarePrivativoFragment;
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,ListaUsuariosFragment.OnFragmentInteractionListener,
         SoftwareLibreFragment.OnFragmentInteractionListener,ListaLicenciaFragment.OnFragmentInteractionListener,
         SoftwarePrivativoFragment.OnFragmentInteractionListener, CreativeCommonsFragment.OnFragmentInteractionListener,
-        CodigoAbiertoFragment.OnFragmentInteractionListener,SugerirLicenciaFragment.OnFragmentInteractionListener
+        CodigoAbiertoFragment.OnFragmentInteractionListener,SugerirLicenciaFragment.OnFragmentInteractionListener,
+        OtrosFragment.OnFragmentInteractionListener,CopyleftFragment.OnFragmentInteractionListener
         {
 
     @Override
@@ -79,6 +82,9 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        navigationView.getMenu().findItem(R.id.nav_ListaUsuarios).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_LicenciasAprobar).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_CerrarSesion).setTitle("Salir");
         getSupportActionBar().setTitle("Licencias Fácil");
 
     }
@@ -161,6 +167,10 @@ public class MainActivity extends AppCompatActivity
             fg = new CreativeCommonsFragment();
             cambioFragment = true;
 
+        }else if (id == R.id.nav_Copyleft) {
+            fg = new CopyleftFragment();
+            cambioFragment = true;
+
         }else if (id == R.id.nav_SoftwarePrivativo) {
             fg = new SoftwarePrivativoFragment();
             cambioFragment = true;
@@ -169,6 +179,16 @@ public class MainActivity extends AppCompatActivity
             Intent inte = new Intent(MainActivity.this, Login.class);
             startActivity(inte);
             finish();
+        }
+        //OTROS
+        else if (id == R.id.nav_FAQ) {
+            fg = new OtrosFragment();
+            cambioFragment = true;
+            VariablesGlobales.isFaq=true;
+        } else if (id == R.id.nav_otros) {
+            fg = new OtrosFragment();
+            cambioFragment = true;
+            VariablesGlobales.isFaq=false;
         }
 
         if(cambioFragment){

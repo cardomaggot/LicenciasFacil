@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="rad"
     tools:context="una.ac.cr.licenciasfacil.Activities.SplashScreen">
 
 
@@ -22,7 +22,7 @@
         android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/wings" />
+        android:src="@drawable/wingx" />
     <TextView
         android:id="@+id/editText"
         android:layout_width="wrap_content"

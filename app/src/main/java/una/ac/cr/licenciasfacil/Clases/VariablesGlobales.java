@@ -8,4 +8,6 @@ public class VariablesGlobales {
 
     public static Usuario Usuario=null;//para saber el usuario en todas las ventanas
     public static boolean isListaAprobacion=false;//para saber si la lista debe cargar licencias o licencias por aprobar
+    public static boolean isFaq=false;
+
 }

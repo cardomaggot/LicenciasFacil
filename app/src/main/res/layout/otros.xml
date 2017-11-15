@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imagenOtro"
+        android:layout_width="60dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="-1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/colorAccent"
+        android:background="@android:drawable/ic_menu_help"/>
+
+    <TextView
+        android:id="@+id/txtOtrosAD"
+        android:layout_width="308dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="12dp"
+        android:hint="Pregunta"
+        android:textColor="@color/colorAccent"
+        android:textSize="14dp"
+        app:layout_constraintLeft_toRightOf="@+id/imagenOtro"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

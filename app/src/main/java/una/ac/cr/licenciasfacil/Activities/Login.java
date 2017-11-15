@@ -14,7 +14,7 @@ import una.ac.cr.licenciasfacil.R;
 
 public class Login extends AppCompatActivity {
 
-    BDOperations db = new BDOperations(this);
+    BDOperations db;
     TextView usuario;
     TextView pass;
 
@@ -39,7 +39,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Usuario u = new Usuario();
-                u.setTipo(2);
+                u.setEmail("root");
+                u.setTipo(0);
                 VariablesGlobales.Usuario = u;
                 Intent inte = new Intent(Login.this,MainActivity.class);
                 startActivity(inte);
@@ -47,21 +48,22 @@ public class Login extends AppCompatActivity {
             }
         });
         VariablesGlobales.Usuario = null;
+        db = new BDOperations(this);
     }
 
 
     public void Iniciar(View v){
 
-        if(usuario.getText().toString().trim().equals("")){
+        /*if(usuario.getText().toString().trim().equals("")){
             PopUpMensaje("Debe digitar el Usuario");
             return;
         }
         if(pass.getText().toString().trim().equals("")){
             PopUpMensaje("Debe digitar la contraseña");
             return;
-        }
+        }*/
 
-        Usuario u= db.findUsuario(usuario.getText().toString(),pass.getText().toString());
+        /*Usuario u= db.findUsuario(usuario.getText().toString(),pass.getText().toString());
         //Hacer la consulta a la base de datos para sacar el tipo de usuario
         if(u != null) {
             VariablesGlobales.Usuario = u;
@@ -69,8 +71,15 @@ public class Login extends AppCompatActivity {
             Intent inte = new Intent(Login.this, MainActivity.class);
             startActivity(inte);
             finish();
+
         }else
-            PopUpMensaje("Usuario Incorrecto");
+            PopUpMensaje("Usuario Incorrecto");*/
+        Usuario u = new Usuario();
+        u.setTipo(2);
+        VariablesGlobales.Usuario = u;
+        Intent inte = new Intent(Login.this,MainActivity.class);
+        startActivity(inte);
+        finish();
     }
 
     public void PopUpMensaje(String msj){

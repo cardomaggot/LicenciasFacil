@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import una.ac.cr.licenciasfacil.R;
 
@@ -27,6 +28,7 @@ public class CodigoAbiertoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    TextView txt;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +67,23 @@ public class CodigoAbiertoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_codigo_abierto, container, false);
+        View v=  inflater.inflate(R.layout.fragment_codigo_abierto, container, false);
+
+        txt = (TextView) v.findViewById(R.id.lblSoftwareLibre);
+        txt.setText("Es la comunidad de software libre, en la cual se rigen a partir de 10 principios, de acuerdo a otras comunidades: " +
+                "\n" +
+                "- Libre redistribución: La licencia del software no debe impedir que este sea regalado o vendido libremente como parte de una distribución mayor que contenga programas de diferentes fuentes. Tampoco debe exigir un pago por hacerlo.\n" +
+                "- Código fuente: A la hora de publicar un programa tiene que incluir su código fuente íntegro o permitir acceder libremente a él.\n" +
+                "- Trabajos derivados: Las licencias deben permitir modificaciones y trabajos derivados, y debe permitir que estos se distribuyan bajo los mismos términos que el software original.\n" +
+                "- Integridad del código fuente del autor: Se puede impedir la distribución de modificaciones únicamente si se permite la distribución de tales como parches. También se puede requerir que trabajos derivados cambien de nombre o número de versión.\n" +
+                "- Sin discriminación de personas o grupos: No se puede discriminar a ninguna persona o grupo a la hora de acceder a un programa o su código.\n" +
+                "- Sin discriminación de áreas de iniciativa: Tampoco le se puede restringir su acceso a ninguna iniciativa. Las empresas o grupos de investigación tienen tanto derecho como el resto a utilizar el software.\n" +
+                "- Distribución de la licencia: Los derechos asociados en las licencias de los programas deben aplicarse a todos a los que lo redistribuyan sin necesidad de pedir una licencia adicional.\n" +
+                "- La licencia no debe ser específica de un producto: Un programa no puede licenciarse únicamente como parte de un software mayor. Podrá ser extraído y utilizado libremente y con todos los derechos en otras soluciones.\n" +
+                "- La licencia no debe restringir otro software: El hecho de que un proyecto sea de código abierto no puede obligar a que los programas en los que se incluye sean también de código abierto.\n" +
+                "- La licencia debe ser tecnológicamente neutral: Ninguna disposición de la licencia puede basarse en la tecnología o un estilo de interfaz, con lo que, por ejemplo, no se debe requerir su aceptación mediante gestos explícitos como clicks de ratón.\n");
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

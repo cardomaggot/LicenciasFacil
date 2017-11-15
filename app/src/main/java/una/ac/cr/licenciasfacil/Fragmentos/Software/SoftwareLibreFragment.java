@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import una.ac.cr.licenciasfacil.R;
 
@@ -27,6 +28,7 @@ public class SoftwareLibreFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    TextView txt;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +67,16 @@ public class SoftwareLibreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_software_libre, container, false);
+        View v= inflater.inflate(R.layout.fragment_software_libre, container, false);
+
+        txt = (TextView) v.findViewById(R.id.lblSoftwareLibre);
+        txt.setText("«Software libre» es el software que respeta la libertad de los usuarios y la comunidad. " +
+                "A grandes rasgos, significa que los usuarios tienen la libertad de ejecutar, copiar, distribuir, " +
+                "estudiar, modificar y mejorar el software. Es decir, el «software libre» es una cuestión de libertad, " +
+                "no de precio. Para entender el concepto, piense en «libre» como en «libre expresión», no como en «barra libre». " +
+                "En inglés, a veces en lugar de «free software» decimos «libre software», empleando ese adjetivo francés o español, " +
+                "derivado de «libertad», para mostrar que no queremos decir que el software es gratuito. ");
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

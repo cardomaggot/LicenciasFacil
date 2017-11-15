@@ -59,6 +59,14 @@ public class BDContract {
         public static final String CONTRASENA = "contrasena";
         public static final String TIPO = "tipo";
     }
+
+    public static class Otros implements BaseColumns { //Nombre de la tabla y de los datos
+        public static final String TABLE_NAME = "otros";
+        public static final String ID = "_id";
+        public static final String TITULO = "titulo";
+        public static final String DESCRIPCION = "descripcion";
+        public static final String TIPO = "tipo";
+    }
 }
 
 

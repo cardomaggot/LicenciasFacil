@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Usuarios">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_ListaUsuarios"
-                    android:icon="@drawable/ic_usuario"
-                    android:title="Lista de Usuarios" />
-            </group>
-        </menu>
-    </item>
     <item android:title="Licencias">
         <menu>
     <group android:checkableBehavior="single">
@@ -55,7 +45,30 @@
             </group>
         </menu>
     </item>
-
+    <item android:title="Otros">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_FAQ"
+                    android:icon="@android:drawable/ic_menu_help"
+                    android:title="Preguntas Frecuentes" />
+                <item
+                    android:id="@+id/nav_otros"
+                    android:icon="@drawable/ic_info"
+                    android:title="Más Conceptos" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Usuarios">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_ListaUsuarios"
+                    android:icon="@drawable/ic_usuario"
+                    android:title="Lista de Usuarios" />
+            </group>
+        </menu>
+    </item>
     <item
         android:id="@+id/nav_CerrarSesion"
         android:icon="@drawable/ic_exit"
